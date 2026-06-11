@@ -337,34 +337,17 @@
 
     let disponibilidade = {};
     TODOS.forEach(id => disponibilidade[id] = true);
-    let BIN_ID = localStorage.getItem('pastel_bin_id') || null;
+    const BIN_ID = "6a2a23dcda38895dfeaac841";
 
     // ── JSONBIN ─────────────────────────────────────────
     async function carregarDisponibilidade() {
         try {
-            if (!BIN_ID) {
-                // Cria o bin pela primeira vez
-                const res = await fetch('https://api.jsonbin.io/v3/b', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Master-Key': MASTER_KEY,
-                        'X-Bin-Name': BIN_NAME,
-                        'X-Bin-Private': 'false'
-                    },
-                    body: JSON.stringify({ disponibilidade })
-                });
-                const data = await res.json();
-                BIN_ID = data.metadata.id;
-                localStorage.setItem('pastel_bin_id', BIN_ID);
-            } else {
-                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-                    headers: { 'X-Master-Key': MASTER_KEY }
-                });
-                const data = await res.json();
-                if (data.record && data.record.disponibilidade) {
-                    disponibilidade = data.record.disponibilidade;
-                }
+            const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                headers: { 'X-Master-Key': MASTER_KEY }
+            });
+            const data = await res.json();
+            if (data.record && data.record.disponibilidade) {
+                disponibilidade = data.record.disponibilidade;
             }
         } catch(e) {
             console.warn('Offline — usando dados locais');
