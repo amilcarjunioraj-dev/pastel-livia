@@ -275,9 +275,43 @@
             <div class="form-section">
                 <div class="form-section-title">Pagamento</div>
                 <div class="radio-group">
-                    <div class="checkbox-item"><input type="radio" id="pix" name="pagamento" value="PIX" checked><label for="pix">PIX – Chave: 21964983008</label></div>
-                    <div class="checkbox-item"><input type="radio" id="dinheiro" name="pagamento" value="Dinheiro na Entrega"><label for="dinheiro">Dinheiro na Entrega</label></div>
-                    <div class="checkbox-item"><input type="radio" id="cartao" name="pagamento" value="Cartão (Máquina)"><label for="cartao">Cartão (Máquina)</label></div>
+                    <div class="checkbox-item"><input type="radio" id="pix" name="pagamento" value="PIX" checked onchange="onPagamentoChange()"><label for="pix">PIX</label></div>
+                    <div class="checkbox-item"><input type="radio" id="dinheiro" name="pagamento" value="Dinheiro na Entrega" onchange="onPagamentoChange()"><label for="dinheiro">Dinheiro na Entrega</label></div>
+                    <div class="checkbox-item"><input type="radio" id="cartao" name="pagamento" value="Cartão (Máquina)" onchange="onPagamentoChange()"><label for="cartao">Cartão (Máquina)</label></div>
+                </div>
+
+                <!-- PIX INFO -->
+                <div id="pix-info" style="margin-top:15px; padding:12px; background:#f9f9f9; border-radius:4px; border:1px solid #eee; font-size:13px;">
+                    <strong>Chave PIX:</strong> 21964983008<br>
+                    <span style="color:#e65100; margin-top:6px; display:block;">Após o pedido, envie o comprovante pelo WhatsApp. O pedido só será confirmado após a confirmação do pagamento.</span>
+                </div>
+
+                <!-- DINHEIRO INFO -->
+                <div id="dinheiro-info" style="display:none; margin-top:15px;">
+                    <div style="padding:12px; background:#f9f9f9; border-radius:4px; border:1px solid #eee;">
+                        <div class="form-group" style="margin-bottom:10px;">
+                            <label>Vai precisar de troco?</label>
+                            <div class="radio-group" style="flex-direction:row; gap:15px; margin-top:8px;">
+                                <div class="checkbox-item" style="flex:1;">
+                                    <input type="radio" id="troco-sim" name="troco" value="sim" onchange="onTrocoChange()">
+                                    <label for="troco-sim">Sim</label>
+                                </div>
+                                <div class="checkbox-item" style="flex:1;">
+                                    <input type="radio" id="troco-nao" name="troco" value="nao" onchange="onTrocoChange()">
+                                    <label for="troco-nao">Não</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="troco-valor-box" style="display:none;">
+                            <label>Troco para quanto?</label>
+                            <input type="text" id="troco-valor" placeholder="Ex: R$ 50,00" style="margin-top:6px;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARTÃO INFO -->
+                <div id="cartao-info" style="display:none; margin-top:15px; padding:12px; background:#f9f9f9; border-radius:4px; border:1px solid #eee; font-size:13px;">
+                    <span style="color:#e65100;">Pagamento na entrega com máquina de cartão.</span>
                 </div>
             </div>
             <button type="submit" class="btn-submit">Enviar para WhatsApp</button>
@@ -624,6 +658,18 @@
 
     function removerItem(i) { cart.splice(i,1); atualizarPreviewCarrinho(); }
 
+    function onPagamentoChange() {
+        const pagamento = document.querySelector('input[name="pagamento"]:checked').value;
+        document.getElementById('pix-info').style.display     = pagamento === 'PIX' ? 'block' : 'none';
+        document.getElementById('dinheiro-info').style.display = pagamento === 'Dinheiro na Entrega' ? 'block' : 'none';
+        document.getElementById('cartao-info').style.display   = pagamento === 'Cartão (Máquina)' ? 'block' : 'none';
+    }
+
+    function onTrocoChange() {
+        const troco = document.querySelector('input[name="troco"]:checked')?.value;
+        document.getElementById('troco-valor-box').style.display = troco === 'sim' ? 'block' : 'none';
+    }
+
     function enviarWhatsApp(e) {
         e.preventDefault();
         const nome      = document.getElementById('nome').value;
@@ -631,7 +677,23 @@
         const apto      = document.getElementById('apto').value;
         const obs       = document.getElementById('observacoes').value;
         const pagamento = document.querySelector('input[name="pagamento"]:checked').value;
-        let msg = `*NOVO PEDIDO - PASTEL DA LÍVIA*\n\nCliente: ${nome}\nBloco: ${bloco}\nApto: ${apto}\nPagamento: ${pagamento}\n`;
+        let infoPagamento = pagamento;
+        if (pagamento === 'PIX') {
+            infoPagamento = 'PIX\n⚠️ Aguardando comprovante PIX';
+        } else if (pagamento === 'Dinheiro na Entrega') {
+            const troco = document.querySelector('input[name="troco"]:checked')?.value;
+            if (troco === 'sim') {
+                const trocoValor = document.getElementById('troco-valor').value;
+                infoPagamento = `Dinheiro na Entrega\nTroco para: ${trocoValor || 'não informado'}`;
+            } else if (troco === 'nao') {
+                infoPagamento = 'Dinheiro na Entrega\nSem troco';
+            } else {
+                infoPagamento = 'Dinheiro na Entrega';
+            }
+        } else if (pagamento === 'Cartão (Máquina)') {
+            infoPagamento = 'Cartão (Máquina)\n⚠️ Levar máquina de cartão';
+        }
+        let msg = `*NOVO PEDIDO - PASTEL DA LÍVIA*\n\nCliente: ${nome}\nBloco: ${bloco}\nApto: ${apto}\nPagamento: ${infoPagamento}\n`;
         if (obs) msg += `Obs: ${obs}\n`;
         msg += `\n━━━━━━━━━━━━━━━\n`;
         let total = 0;
