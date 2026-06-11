@@ -591,6 +591,10 @@
     }
 
     function escolherProduto(tipo) {
+        // Bloquear se offline
+        const toggle = document.getElementById('toggle-online');
+        if (toggle && !toggle.checked) return;
+
         if (tipo==='gourmet') { document.getElementById('form-gourmet').reset(); updateIngredientCount(); applyDisponibilidade(); }
         else if (tipo==='doce') { document.getElementById('form-doce').reset(); }
         else if (tipo==='bebida') { document.getElementById('form-bebida').reset(); Object.keys(bebidaQtys).forEach(k => { bebidaQtys[k]=1; document.getElementById(`qty-${k}`).textContent='1'; }); }
@@ -737,7 +741,7 @@
                     else if (p.startsWith('Refrigerante: ')) refri = p.replace('Refrigerante: ', '');
                 });
                 itensMsg += `\n*Trio da Lívia* — R$ ${item.preco.toFixed(2)}`;
-                itensMsg += `\nPasstel: ${pastelIng}`;
+                itensMsg += `\nPastel: ${pastelIng}`;
                 if (tempero && tempero !== 'nenhum') itensMsg += `\nTempero: ${tempero}`;
                 itensMsg += `\nPastelzinho Doce: ${pastelzinho}`;
                 itensMsg += `\nRefrigerante: ${refri}\n`;
@@ -823,9 +827,18 @@
     function aplicarStatusOnline(online) {
         const aviso = document.getElementById('aviso-offline');
         const cards = document.querySelectorAll('.product-card');
+        const btnFinalizar = document.getElementById('btn-finalizar');
         if (!online) {
             aviso.style.display = 'block';
+            // Bloqueia TODOS os cards do cardápio
             cards.forEach(c => { c.style.opacity='0.4'; c.style.pointerEvents='none'; });
+            // Se estiver em qualquer tela de produto, volta pro cardápio
+            const telaAtual = document.querySelector('.screen.active').id;
+            if (telaAtual !== 'screen-cardapio' && telaAtual !== 'screen-admin' && telaAtual !== 'screen-admin-login') {
+                mudarTela(telaAtual, 'screen-cardapio');
+            }
+            // Esconde carrinho e botão finalizar
+            document.getElementById('cart-preview').style.display = 'none';
         } else {
             aviso.style.display = 'none';
             cards.forEach(c => { c.style.opacity=''; c.style.pointerEvents=''; });
