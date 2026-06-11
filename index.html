@@ -83,6 +83,12 @@
     <div class="screen active" id="screen-cardapio">
         <div class="form-section">
             <div class="form-section-title">Cardápio</div>
+            <div id="aviso-offline" style="display:none; padding:15px; background:#ffebee; border:1px solid #ffcdd2; border-radius:4px; margin-bottom:15px; font-size:13px; color:#c62828; text-align:center;">
+                <strong>Estamos fechados no momento.</strong><br>Voltamos em breve!
+            </div>
+            <div style="padding:10px 12px; background:#f9f9f9; border-radius:4px; border:1px solid #eee; margin-bottom:20px; font-size:12px; color:#999; text-align:center;">
+                Funcionamos de <strong>quinta a domingo</strong>, das <strong>19h às 23h</strong>
+            </div>
             <div class="product-card" onclick="escolherProduto('gourmet')">
                 <div class="product-card-title">Pastel Gourmet</div>
                 <div class="product-card-price">R$ 20,00</div>
@@ -304,7 +310,9 @@
                         </div>
                         <div id="troco-valor-box" style="display:none;">
                             <label>Troco para quanto?</label>
-                            <input type="text" id="troco-valor" placeholder="Ex: R$ 50,00" style="margin-top:6px;">
+                            <input type="number" id="troco-valor" placeholder="Ex: 50" style="margin-top:6px;" oninput="calcularTroco()">
+                            <div id="troco-resultado" style="display:none; margin-top:8px; padding:10px; background:#fff3e0; border:1px solid #ffe0b2; border-radius:4px; font-size:13px; color:#e65100;">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -338,6 +346,17 @@
         <div class="form-section">
             <div class="form-section-title">Painel Admin</div>
             <p style="font-size:13px;color:#999;margin-bottom:20px;">Desative para marcar como indisponível. Salva automaticamente.</p>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:15px; border-radius:4px; border:2px solid #000; margin-bottom:20px;">
+                <div>
+                    <div style="font-weight:600; font-size:14px;">Status do App</div>
+                    <div id="status-label" style="font-size:12px; color:#999; margin-top:2px;">Online — aceitando pedidos</div>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-online" checked onchange="toggleOnline(this.checked)">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
             <div id="admin-status" class="status-msg" style="display:none;"></div>
             <div class="admin-section-title">Proteínas</div>
             <div id="admin-proteinas"></div>
@@ -395,8 +414,12 @@
                 headers: { 'X-Master-Key': MASTER_KEY }
             });
             const data = await res.json();
-            if (data.record && data.record.disponibilidade) {
-                disponibilidade = data.record.disponibilidade;
+            if (data.record) {
+                if (data.record.disponibilidade) disponibilidade = data.record.disponibilidade;
+                const online = data.record.online !== false;
+                aplicarStatusOnline(online);
+                const toggle = document.getElementById('toggle-online');
+                if (toggle) toggle.checked = online;
             }
         } catch(e) {
             console.warn('Offline — usando dados locais');
@@ -677,31 +700,157 @@
         const apto      = document.getElementById('apto').value;
         const obs       = document.getElementById('observacoes').value;
         const pagamento = document.querySelector('input[name="pagamento"]:checked').value;
-        let infoPagamento = pagamento;
+
+        // Montar info de pagamento
+        let infoPagamento = '';
         if (pagamento === 'PIX') {
-            infoPagamento = 'PIX\n⚠️ Aguardando comprovante PIX';
+            infoPagamento = 'PIX\n⚠️ Aguardando comprovante PIX\nChave PIX: 21964983008';
         } else if (pagamento === 'Dinheiro na Entrega') {
             const troco = document.querySelector('input[name="troco"]:checked')?.value;
             if (troco === 'sim') {
                 const trocoValor = document.getElementById('troco-valor').value;
-                infoPagamento = `Dinheiro na Entrega\nTroco para: ${trocoValor || 'não informado'}`;
-            } else if (troco === 'nao') {
-                infoPagamento = 'Dinheiro na Entrega\nSem troco';
+                const totalPedido = cart.reduce((s, i) => s + i.preco, 0);
+                const troco_calc = parseFloat(trocoValor) - totalPedido;
+                infoPagamento = `Dinheiro na Entrega\n💵 Troco para: R$ ${parseFloat(trocoValor).toFixed(2)}\n💰 Troco a devolver: R$ ${troco_calc.toFixed(2)}`;
             } else {
-                infoPagamento = 'Dinheiro na Entrega';
+                infoPagamento = 'Dinheiro na Entrega\nSem troco';
             }
         } else if (pagamento === 'Cartão (Máquina)') {
             infoPagamento = 'Cartão (Máquina)\n⚠️ Levar máquina de cartão';
         }
-        let msg = `*NOVO PEDIDO - PASTEL DA LÍVIA*\n\nCliente: ${nome}\nBloco: ${bloco}\nApto: ${apto}\nPagamento: ${infoPagamento}\n`;
-        if (obs) msg += `Obs: ${obs}\n`;
-        msg += `\n━━━━━━━━━━━━━━━\n`;
+
+        // Calcular total
         let total = 0;
-        cart.forEach(item => { msg += `\n${item.tipo}\n`; if (item.detalhes) msg += `${item.detalhes}\n`; msg += `R$ ${item.preco.toFixed(2)}\n`; total += item.preco; });
-        msg += `\n━━━━━━━━━━━━━━━\n*TOTAL: R$ ${total.toFixed(2)}*`;
-        if (pagamento === 'PIX') msg += `\n\nChave PIX: 21964983008`;
+        cart.forEach(item => total += item.preco);
+
+        // Montar itens organizados
+        let itensMsg = '';
+        cart.forEach(item => {
+            if (item.tipo === 'Trio da Lívia') {
+                // Separar detalhes do trio
+                const partes = item.detalhes.split(' | ');
+                let pastelIng = '', tempero = '', pastelzinho = '', refri = '';
+                partes.forEach(p => {
+                    if (p.startsWith('Pastel: ')) pastelIng = p.replace('Pastel: ', '');
+                    else if (p.startsWith('Tempero: ')) tempero = p.replace('Tempero: ', '');
+                    else if (p.startsWith('Pastelzinho: ')) pastelzinho = p.replace('Pastelzinho: ', '');
+                    else if (p.startsWith('Refrigerante: ')) refri = p.replace('Refrigerante: ', '');
+                });
+                itensMsg += `\n*Trio da Lívia* — R$ ${item.preco.toFixed(2)}`;
+                itensMsg += `\nPasstel: ${pastelIng}`;
+                if (tempero && tempero !== 'nenhum') itensMsg += `\nTempero: ${tempero}`;
+                itensMsg += `\nPastelzinho Doce: ${pastelzinho}`;
+                itensMsg += `\nRefrigerante: ${refri}\n`;
+            } else if (item.tipo === 'Pastel Gourmet') {
+                const partes = item.detalhes.split(' | ');
+                let ings = '', tempero = '';
+                partes.forEach(p => {
+                    if (p.startsWith('Tempero: ')) tempero = p.replace('Tempero: ', '');
+                    else ings = p;
+                });
+                itensMsg += `\n*Pastel Gourmet* — R$ ${item.preco.toFixed(2)}`;
+                itensMsg += `\nIngredientes: ${ings}`;
+                if (tempero && tempero !== 'nenhum') itensMsg += `\nTempero: ${tempero}`;
+                itensMsg += '\n';
+            } else if (item.tipo === 'Pastelzinho Doce') {
+                itensMsg += `\n*Pastelzinho Doce* — R$ ${item.preco.toFixed(2)}`;
+                itensMsg += `\nSabor: ${item.detalhes}\n`;
+            } else {
+                itensMsg += `\n*${item.tipo}* — R$ ${item.preco.toFixed(2)}\n`;
+            }
+        });
+
+        // Montar mensagem final
+        let msg = `*🧾 NOVO PEDIDO — PASTEL DA LÍVIA*`;
+        msg += `\n\n👤 *Cliente:* ${nome}`;
+        msg += `\n🏢 *Bloco:* ${bloco}  |  🏠 *Apto:* ${apto}`;
+        msg += `\n💰 *Total:* R$ ${total.toFixed(2)}`;
+        msg += `\n💳 *Pagamento:* ${infoPagamento}`;
+        if (obs) msg += `\n📝 *Obs:* ${obs}`;
+        msg += `\n\n━━━━━━━━━━━━━━━`;
+        msg += `\n🛒 *ITENS DO PEDIDO:*`;
+        msg += itensMsg;
+        msg += `━━━━━━━━━━━━━━━`;
+
         window.open(`https://wa.me/5521964983008?text=${encodeURIComponent(msg)}`, '_blank');
+
+        // Voltar pra tela inicial após enviar
+        setTimeout(() => {
+            cart = [];
+            document.getElementById('form-dados').reset();
+            document.getElementById('cart-preview').style.display = 'none';
+            mudarTela('screen-dados', 'screen-cardapio');
+            alert('Pedido enviado! Obrigado pelo seu pedido 🎉');
+        }, 500);
     }
+
+    // ── TROCO ────────────────────────────────────────────
+    function calcularTroco() {
+        const valor = parseFloat(document.getElementById('troco-valor').value);
+        const total = cart.reduce((s, i) => s + i.preco, 0);
+        const resultado = document.getElementById('troco-resultado');
+        if (!valor || valor <= 0) { resultado.style.display = 'none'; return; }
+        if (valor < total) {
+            resultado.style.display = 'block';
+            resultado.style.background = '#ffebee';
+            resultado.style.borderColor = '#ffcdd2';
+            resultado.style.color = '#c62828';
+            resultado.innerHTML = `⚠️ Valor insuficiente! Total do pedido: R$ ${total.toFixed(2)}`;
+        } else {
+            const troco = valor - total;
+            resultado.style.display = 'block';
+            resultado.style.background = '#fff3e0';
+            resultado.style.borderColor = '#ffe0b2';
+            resultado.style.color = '#e65100';
+            resultado.innerHTML = `💰 Troco a devolver: <strong>R$ ${troco.toFixed(2)}</strong>`;
+        }
+    }
+
+    // ── ONLINE/OFFLINE ───────────────────────────────────
+    async function toggleOnline(online) {
+        const label = document.getElementById('status-label');
+        label.textContent = online ? 'Online — aceitando pedidos' : 'Offline — pausado';
+        try {
+            await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', 'X-Master-Key': MASTER_KEY },
+                body: JSON.stringify({ disponibilidade, online })
+            });
+        } catch(e) { console.warn('Erro ao salvar status online'); }
+        aplicarStatusOnline(online);
+    }
+
+    function aplicarStatusOnline(online) {
+        const aviso = document.getElementById('aviso-offline');
+        const cards = document.querySelectorAll('.product-card');
+        if (!online) {
+            aviso.style.display = 'block';
+            cards.forEach(c => { c.style.opacity='0.4'; c.style.pointerEvents='none'; });
+        } else {
+            aviso.style.display = 'none';
+            cards.forEach(c => { c.style.opacity=''; c.style.pointerEvents=''; });
+            applyDisponibilidade();
+        }
+    }
+
+    // ── AUTO-REFRESH DISPONIBILIDADE (a cada 2 min) ──────
+    setInterval(async () => {
+        try {
+            const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                headers: { 'X-Master-Key': MASTER_KEY }
+            });
+            const data = await res.json();
+            if (data.record) {
+                if (data.record.disponibilidade) disponibilidade = data.record.disponibilidade;
+                applyDisponibilidade();
+                // Verificar status online
+                const online = data.record.online !== false;
+                aplicarStatusOnline(online);
+                const toggle = document.getElementById('toggle-online');
+                if (toggle) toggle.checked = online;
+            }
+        } catch(e) {}
+    }, 120000); // 2 minutos
 
     // ── INIT ────────────────────────────────────────────
     carregarDisponibilidade();
