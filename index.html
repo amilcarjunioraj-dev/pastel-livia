@@ -88,7 +88,7 @@
                 <div class="product-card-price">R$ 20,00</div>
                 <div class="product-card-desc">Monte com até 6 ingredientes + tempero</div>
             </div>
-            <div class="product-card" onclick="escolherProduto('doce')">
+            <div class="product-card" id="card-doce" onclick="escolherProduto('doce')">
                 <div class="product-card-title">Pastelzinho Doce</div>
                 <div class="product-card-price">R$ 10,00</div>
                 <div class="product-card-desc">5 sabores disponíveis</div>
@@ -98,7 +98,7 @@
                 <div class="product-card-price">R$ 4,00 – R$ 6,00</div>
                 <div class="product-card-desc">Refrigerantes e Guaracamp</div>
             </div>
-            <div class="product-card" onclick="escolherProduto('trio')">
+            <div class="product-card" id="card-trio" onclick="escolherProduto('trio')">
                 <div class="product-card-title">Trio da Lívia</div>
                 <div class="product-card-price">R$ 30,00</div>
                 <div class="product-card-desc">Pastel + Pastelzinho + Refrigerante</div>
@@ -173,11 +173,11 @@
                 <div class="form-group">
                     <label>Escolha o sabor</label>
                     <div class="radio-group">
-                        <div class="checkbox-item"><input type="radio" id="romeu" name="sabor" value="Romeu e Julieta"><label for="romeu">Romeu e Julieta</label></div>
-                        <div class="checkbox-item"><input type="radio" id="banana-canela" name="sabor" value="Banana com Canela"><label for="banana-canela">Banana com Canela</label></div>
-                        <div class="checkbox-item"><input type="radio" id="banana-choco" name="sabor" value="Banana com Chocolate"><label for="banana-choco">Banana com Chocolate</label></div>
-                        <div class="checkbox-item"><input type="radio" id="choco-confete" name="sabor" value="Chocolate com Confete"><label for="choco-confete">Chocolate com Confete</label></div>
-                        <div class="checkbox-item"><input type="radio" id="doce-leite" name="sabor" value="Doce de Leite"><label for="doce-leite">Doce de Leite</label></div>
+                        <div class="checkbox-item" id="wrap-sabor-romeu-julieta"><input type="radio" id="romeu" name="sabor" value="Romeu e Julieta"><label for="romeu">Romeu e Julieta</label></div>
+                        <div class="checkbox-item" id="wrap-sabor-banana-canela"><input type="radio" id="banana-canela" name="sabor" value="Banana com Canela"><label for="banana-canela">Banana com Canela</label></div>
+                        <div class="checkbox-item" id="wrap-sabor-banana-chocolate"><input type="radio" id="banana-choco" name="sabor" value="Banana com Chocolate"><label for="banana-choco">Banana com Chocolate</label></div>
+                        <div class="checkbox-item" id="wrap-sabor-chocolate-confete"><input type="radio" id="choco-confete" name="sabor" value="Chocolate com Confete"><label for="choco-confete">Chocolate com Confete</label></div>
+                        <div class="checkbox-item" id="wrap-sabor-doce-leite"><input type="radio" id="doce-leite" name="sabor" value="Doce de Leite"><label for="doce-leite">Doce de Leite</label></div>
                     </div>
                 </div>
             </div>
@@ -194,11 +194,11 @@
                 <div class="form-section-title">Bebida</div>
                 <div class="form-group">
                     <label>Escolha a bebida e a quantidade</label>
-                    <div class="beverage-row"><input type="radio" id="guaracamp" name="bebida" value="Guaracamp|4" required><label for="guaracamp" style="margin:0;">Guaracamp – R$ 4</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('guaracamp',-1)">−</button><div class="qty-display" id="qty-guaracamp">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('guaracamp',1)">+</button></div></div>
-                    <div class="beverage-row"><input type="radio" id="coca" name="bebida" value="Coca-Cola|6"><label for="coca" style="margin:0;">Coca-Cola – R$ 6</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('coca',-1)">−</button><div class="qty-display" id="qty-coca">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('coca',1)">+</button></div></div>
-                    <div class="beverage-row"><input type="radio" id="coca-zero" name="bebida" value="Coca-Cola Zero|6"><label for="coca-zero" style="margin:0;">Coca-Cola Zero – R$ 6</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('coca-zero',-1)">−</button><div class="qty-display" id="qty-coca-zero">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('coca-zero',1)">+</button></div></div>
-                    <div class="beverage-row"><input type="radio" id="guarana" name="bebida" value="Guaraná Antarctica|6"><label for="guarana" style="margin:0;">Guaraná Antarctica – R$ 6</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('guarana',-1)">−</button><div class="qty-display" id="qty-guarana">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('guarana',1)">+</button></div></div>
-                    <div class="beverage-row"><input type="radio" id="guarana-zero" name="bebida" value="Guaraná Antarctica Zero|6"><label for="guarana-zero" style="margin:0;">Guaraná Antarctica Zero – R$ 6</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('guarana-zero',-1)">−</button><div class="qty-display" id="qty-guarana-zero">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('guarana-zero',1)">+</button></div></div>
+                    <div class="beverage-row" id="wrap-beb-guaracamp"><input type="radio" id="guaracamp" name="bebida" value="Guaracamp|4"><label for="guaracamp" style="margin:0;">Guaracamp – R$ 4</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('guaracamp',-1)">−</button><div class="qty-display" id="qty-guaracamp">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('guaracamp',1)">+</button></div></div>
+                    <div class="beverage-row" id="wrap-beb-coca-cola"><input type="radio" id="coca" name="bebida" value="Coca-Cola|6"><label for="coca" style="margin:0;">Coca-Cola – R$ 6</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('coca',-1)">−</button><div class="qty-display" id="qty-coca">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('coca',1)">+</button></div></div>
+                    <div class="beverage-row" id="wrap-beb-coca-cola-zero"><input type="radio" id="coca-zero" name="bebida" value="Coca-Cola Zero|6"><label for="coca-zero" style="margin:0;">Coca-Cola Zero – R$ 6</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('coca-zero',-1)">−</button><div class="qty-display" id="qty-coca-zero">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('coca-zero',1)">+</button></div></div>
+                    <div class="beverage-row" id="wrap-beb-guarana-antarctica"><input type="radio" id="guarana" name="bebida" value="Guaraná Antarctica|6"><label for="guarana" style="margin:0;">Guaraná Antarctica – R$ 6</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('guarana',-1)">−</button><div class="qty-display" id="qty-guarana">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('guarana',1)">+</button></div></div>
+                    <div class="beverage-row" id="wrap-beb-guarana-zero"><input type="radio" id="guarana-zero" name="bebida" value="Guaraná Antarctica Zero|6"><label for="guarana-zero" style="margin:0;">Guaraná Antarctica Zero – R$ 6</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('guarana-zero',-1)">−</button><div class="qty-display" id="qty-guarana-zero">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('guarana-zero',1)">+</button></div></div>
                 </div>
             </div>
             <button type="submit" class="btn-submit">Adicionar ao carrinho</button>
@@ -311,6 +311,12 @@
             <div id="admin-queijos"></div>
             <div class="admin-section-title">Complementos</div>
             <div id="admin-complementos"></div>
+            <div class="admin-section-title">Sabores do Pastelzinho Doce</div>
+            <div id="admin-sabores"></div>
+            <div class="admin-section-title">Bebidas</div>
+            <div id="admin-bebidas"></div>
+            <div class="admin-section-title">Combos</div>
+            <div id="admin-combos"></div>
         </div>
     </div>
 </div>
@@ -324,18 +330,28 @@
     const INGREDIENTES = {
         proteinas:    ['frango','carne','calabresa','linguica'],
         queijos:      ['mussarela','catupiry','cheddar','cream'],
-        complementos: ['bacon','presunto','milho','palmito','tomate','cebola','cebola-roxa','azeitona','ovo']
+        complementos: ['bacon','presunto','milho','palmito','tomate','cebola','cebola-roxa','azeitona','ovo'],
+        sabores:      ['romeu-julieta','banana-canela','banana-chocolate','chocolate-confete','doce-leite'],
+        bebidas:      ['guaracamp','coca-cola','coca-cola-zero','guarana-antarctica','guarana-zero'],
+        combos:       ['trio-livia']
     };
     const NOMES = {
         frango:'Frango', carne:'Carne', calabresa:'Calabresa', linguica:'Linguiça Toscana',
         mussarela:'Mussarela', catupiry:'Catupiry', cheddar:'Cheddar', cream:'Cream Cheese',
         bacon:'Bacon', presunto:'Presunto', milho:'Milho', palmito:'Palmito',
-        tomate:'Tomate', cebola:'Cebola', 'cebola-roxa':'Cebola Roxa', azeitona:'Azeitona', ovo:'Ovo Cozido'
+        tomate:'Tomate', cebola:'Cebola', 'cebola-roxa':'Cebola Roxa', azeitona:'Azeitona', ovo:'Ovo Cozido',
+        'romeu-julieta':'Romeu e Julieta', 'banana-canela':'Banana com Canela',
+        'banana-chocolate':'Banana com Chocolate', 'chocolate-confete':'Chocolate com Confete',
+        'doce-leite':'Doce de Leite',
+        'guaracamp':'Guaracamp', 'coca-cola':'Coca-Cola', 'coca-cola-zero':'Coca-Cola Zero',
+        'guarana-antarctica':'Guaraná Antarctica', 'guarana-zero':'Guaraná Antarctica Zero',
+        'trio-livia':'Trio da Lívia'
     };
-    const TODOS = [...INGREDIENTES.proteinas, ...INGREDIENTES.queijos, ...INGREDIENTES.complementos];
+    const TODOS = [...INGREDIENTES.proteinas, ...INGREDIENTES.queijos, ...INGREDIENTES.complementos,
+                   ...INGREDIENTES.sabores, ...INGREDIENTES.bebidas, ...INGREDIENTES.combos];
 
     let disponibilidade = {};
-    TODOS.forEach(id => disponibilidade[id] = true);
+    TODOS.forEach(id => disponibilidade[id] = true); // todos disponíveis por padrão
 
 
     // ── JSONBIN ─────────────────────────────────────────
@@ -379,12 +395,64 @@
 
     // ── DISPONIBILIDADE ─────────────────────────────────
     function applyDisponibilidade() {
-        TODOS.forEach(id => {
-            aplicarWrap(`wrap-${id}`, id, disponibilidade[id]);
-            aplicarWrap(`wrap-trio-${id}`, `trio-${id}`, disponibilidade[id]);
+        // Ingredientes do pastel
+        [...INGREDIENTES.proteinas, ...INGREDIENTES.queijos, ...INGREDIENTES.complementos].forEach(id => {
+            aplicarWrap(`wrap-${id}`, id, disponibilidade[id] !== false);
+            aplicarWrap(`wrap-trio-${id}`, `trio-${id}`, disponibilidade[id] !== false);
         });
+
+        // Sabores do pastelzinho
+        const saborMap = {
+            'romeu-julieta': 'romeu', 'banana-canela': 'banana-canela',
+            'banana-chocolate': 'banana-choco', 'chocolate-confete': 'choco-confete',
+            'doce-leite': 'doce-leite'
+        };
+        INGREDIENTES.sabores.forEach(id => {
+            const inputId = saborMap[id];
+            aplicarWrap(`wrap-sabor-${id}`, inputId, disponibilidade[id] !== false);
+            aplicarWrap(`wrap-trio-sabor-${id}`, `trio-${inputId}`, disponibilidade[id] !== false);
+        });
+
+        // Bebidas
+        const bebidaMap = {
+            'guaracamp': 'guaracamp', 'coca-cola': 'coca', 'coca-cola-zero': 'coca-zero',
+            'guarana-antarctica': 'guarana', 'guarana-zero': 'guarana-zero'
+        };
+        INGREDIENTES.bebidas.forEach(id => {
+            const inputId = bebidaMap[id];
+            aplicarWrap(`wrap-beb-${id}`, inputId, disponibilidade[id] !== false);
+            aplicarWrap(`wrap-trio-beb-${id}`, `trio-${inputId}`, disponibilidade[id] !== false);
+        });
+
+        // Cards do cardápio
+        aplicarCard('card-doce', disponibilidade['romeu-julieta'] !== false ||
+            disponibilidade['banana-canela'] !== false || disponibilidade['banana-chocolate'] !== false ||
+            disponibilidade['chocolate-confete'] !== false || disponibilidade['doce-leite'] !== false);
+        aplicarCard('card-trio', disponibilidade['trio-livia'] !== false);
+
         updateIngredientCount();
         updateTrioCount();
+    }
+
+    function aplicarCard(cardId, disp) {
+        const card = document.getElementById(cardId);
+        if (!card) return;
+        if (!disp) {
+            card.style.opacity = '0.5';
+            card.style.pointerEvents = 'none';
+            if (!card.querySelector('.unavailable-tag')) {
+                const tag = document.createElement('div');
+                tag.className = 'unavailable-tag';
+                tag.style.marginTop = '5px';
+                tag.textContent = 'Indisponível no momento';
+                card.appendChild(tag);
+            }
+        } else {
+            card.style.opacity = '';
+            card.style.pointerEvents = '';
+            const tag = card.querySelector('.unavailable-tag');
+            if (tag) tag.remove();
+        }
     }
 
     function aplicarWrap(wrapId, inputId, disp) {
@@ -431,12 +499,12 @@
     }
 
     function buildAdmin() {
-        ['proteinas','queijos','complementos'].forEach(grupo => {
+        ['proteinas','queijos','complementos','sabores','bebidas','combos'].forEach(grupo => {
             document.getElementById(`admin-${grupo}`).innerHTML = INGREDIENTES[grupo].map(id => `
                 <div class="admin-toggle-row">
                     <span class="admin-toggle-name">${NOMES[id]}</span>
                     <label class="toggle-switch">
-                        <input type="checkbox" ${disponibilidade[id] ? 'checked' : ''} onchange="toggleItem('${id}', this.checked)">
+                        <input type="checkbox" ${disponibilidade[id] !== false ? 'checked' : ''} onchange="toggleItem('${id}', this.checked)">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
