@@ -171,9 +171,9 @@
             <div class="form-section">
                 <div class="form-section-title">Pastelzinho Doce – R$ 10</div>
                 <div class="form-group">
-                    <label>Escolha o sabor *</label>
+                    <label>Escolha o sabor</label>
                     <div class="radio-group">
-                        <div class="checkbox-item"><input type="radio" id="romeu" name="sabor" value="Romeu e Julieta" required><label for="romeu">Romeu e Julieta</label></div>
+                        <div class="checkbox-item"><input type="radio" id="romeu" name="sabor" value="Romeu e Julieta"><label for="romeu">Romeu e Julieta</label></div>
                         <div class="checkbox-item"><input type="radio" id="banana-canela" name="sabor" value="Banana com Canela"><label for="banana-canela">Banana com Canela</label></div>
                         <div class="checkbox-item"><input type="radio" id="banana-choco" name="sabor" value="Banana com Chocolate"><label for="banana-choco">Banana com Chocolate</label></div>
                         <div class="checkbox-item"><input type="radio" id="choco-confete" name="sabor" value="Chocolate com Confete"><label for="choco-confete">Chocolate com Confete</label></div>
@@ -241,15 +241,15 @@
                     <div class="checkbox-item"><input type="checkbox" id="trio-salsa" name="trio-tempero" value="Salsa"><label for="trio-salsa">Salsa</label></div>
                 </div></div>
                 <div class="ingredient-counter" id="trioCounter">0 / 6 ingredientes</div>
-                <div class="form-group" style="margin-top:20px;"><label>Pastelzinho Doce *</label><div class="radio-group">
-                    <div class="checkbox-item"><input type="radio" id="trio-romeu" name="trio-sabor" value="Romeu e Julieta" required><label for="trio-romeu">Romeu e Julieta</label></div>
+                <div class="form-group" style="margin-top:20px;"><label>Pastelzinho Doce</label><div class="radio-group">
+                    <div class="checkbox-item"><input type="radio" id="trio-romeu" name="trio-sabor" value="Romeu e Julieta"><label for="trio-romeu">Romeu e Julieta</label></div>
                     <div class="checkbox-item"><input type="radio" id="trio-banana-canela" name="trio-sabor" value="Banana com Canela"><label for="trio-banana-canela">Banana com Canela</label></div>
                     <div class="checkbox-item"><input type="radio" id="trio-banana-choco" name="trio-sabor" value="Banana com Chocolate"><label for="trio-banana-choco">Banana com Chocolate</label></div>
                     <div class="checkbox-item"><input type="radio" id="trio-choco-confete" name="trio-sabor" value="Chocolate com Confete"><label for="trio-choco-confete">Chocolate com Confete</label></div>
                     <div class="checkbox-item"><input type="radio" id="trio-doce-leite" name="trio-sabor" value="Doce de Leite"><label for="trio-doce-leite">Doce de Leite</label></div>
                 </div></div>
-                <div class="form-group" style="margin-top:20px;"><label>Refrigerante *</label><div class="radio-group">
-                    <div class="checkbox-item"><input type="radio" id="trio-guaracamp" name="trio-bebida" value="Guaracamp" required><label for="trio-guaracamp">Guaracamp</label></div>
+                <div class="form-group" style="margin-top:20px;"><label>Refrigerante</label><div class="radio-group">
+                    <div class="checkbox-item"><input type="radio" id="trio-guaracamp" name="trio-bebida" value="Guaracamp"><label for="trio-guaracamp">Guaracamp</label></div>
                     <div class="checkbox-item"><input type="radio" id="trio-coca" name="trio-bebida" value="Coca-Cola"><label for="trio-coca">Coca-Cola</label></div>
                     <div class="checkbox-item"><input type="radio" id="trio-coca-zero" name="trio-bebida" value="Coca-Cola Zero"><label for="trio-coca-zero">Coca-Cola Zero</label></div>
                     <div class="checkbox-item"><input type="radio" id="trio-guarana" name="trio-bebida" value="Guaraná Antarctica"><label for="trio-guarana">Guaraná Antarctica</label></div>
@@ -317,10 +317,9 @@
 
 <script>
     // ── CONFIG ──────────────────────────────────────────
-    const MASTER_KEY  = '$2a$10$3ZCCeWIHO9empTb2BsrRTuhzUusBilcV8A1lzwGW9VEwAtUDc8Wxy';
-    const ACCESS_KEY  = '$2a$10$dVSOoii1futgPPqLqlzaiefZLmb7lAzh/a0gYqB4BiciozE5q0x8y';
-    const ADMIN_SENHA = 'livia2025';
-    const BIN_NAME    = 'pastel-livia-disp';
+    const SUPABASE_URL = 'https://zjwwhwvxhvgbhmrlovnp.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpqd3dod3Z4aHZnYmhtcmxvdm5wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExMzgzNTksImV4cCI6MjA5NjcxNDM1OX0.sqEbkEMMPOmwmG789-i2hhHZZwysPe1X0jYpiZRVDl8';
+    const ADMIN_SENHA  = 'livia2025';
 
     const INGREDIENTES = {
         proteinas:    ['frango','carne','calabresa','linguica'],
@@ -337,18 +336,19 @@
 
     let disponibilidade = {};
     TODOS.forEach(id => disponibilidade[id] = true);
-    const BIN_ID = "6a2a23dcda38895dfeaac841";
 
-    // ── JSONBIN ─────────────────────────────────────────
+
+    // ── SUPABASE ─────────────────────────────────────────
     async function carregarDisponibilidade() {
         try {
-            const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-                headers: { 'X-Master-Key': MASTER_KEY }
+            const res = await fetch(`${SUPABASE_URL}/rest/v1/disponibilidade?select=id,disponivel`, {
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`
+                }
             });
-            const data = await res.json();
-            if (data.record && data.record.disponibilidade) {
-                disponibilidade = data.record.disponibilidade;
-            }
+            const rows = await res.json();
+            rows.forEach(row => disponibilidade[row.id] = row.disponivel);
         } catch(e) {
             console.warn('Offline — usando dados locais');
         }
@@ -361,13 +361,19 @@
         statusEl.className = 'status-msg saving';
         statusEl.textContent = 'Salvando...';
         try {
-            await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
+            const updates = Object.keys(disponibilidade).map(id => ({
+                id,
+                disponivel: disponibilidade[id]
+            }));
+            await fetch(`${SUPABASE_URL}/rest/v1/disponibilidade`, {
+                method: 'POST',
                 headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`,
                     'Content-Type': 'application/json',
-                    'X-Master-Key': MASTER_KEY
+                    'Prefer': 'resolution=merge-duplicates'
                 },
-                body: JSON.stringify({ disponibilidade })
+                body: JSON.stringify(updates)
             });
             statusEl.className = 'status-msg status-ok';
             statusEl.textContent = 'Salvo! Clientes já veem as alterações.';
