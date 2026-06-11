@@ -317,9 +317,9 @@
 
 <script>
     // ── CONFIG ──────────────────────────────────────────
-    const SUPABASE_URL = 'https://zjwwhwvxhvgbhmrlovnp.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpqd3dod3Z4aHZnYmhtcmxvdm5wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExMzgzNTksImV4cCI6MjA5NjcxNDM1OX0.sqEbkEMMPOmwmG789-i2hhHZZwysPe1X0jYpiZRVDl8';
-    const ADMIN_SENHA  = 'livia2025';
+    const MASTER_KEY  = '$2a$10$3ZCCeWIHO9empTb2BsrRTuhzUusBilcV8A1lzwGW9VEwAtUDc8Wxy';
+    const ADMIN_SENHA = 'livia2025';
+    const BIN_ID      = '6a2a23dcda38895dfeaac841';
 
     const INGREDIENTES = {
         proteinas:    ['frango','carne','calabresa','linguica'],
@@ -338,17 +338,16 @@
     TODOS.forEach(id => disponibilidade[id] = true);
 
 
-    // ── SUPABASE ─────────────────────────────────────────
+    // ── JSONBIN ─────────────────────────────────────────
     async function carregarDisponibilidade() {
         try {
-            const res = await fetch(`${SUPABASE_URL}/rest/v1/disponibilidade?select=id,disponivel`, {
-                headers: {
-                    'apikey': SUPABASE_KEY,
-                    'Authorization': `Bearer ${SUPABASE_KEY}`
-                }
+            const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                headers: { 'X-Master-Key': MASTER_KEY }
             });
-            const rows = await res.json();
-            rows.forEach(row => disponibilidade[row.id] = row.disponivel);
+            const data = await res.json();
+            if (data.record && data.record.disponibilidade) {
+                disponibilidade = data.record.disponibilidade;
+            }
         } catch(e) {
             console.warn('Offline — usando dados locais');
         }
@@ -361,19 +360,13 @@
         statusEl.className = 'status-msg saving';
         statusEl.textContent = 'Salvando...';
         try {
-            const updates = Object.keys(disponibilidade).map(id => ({
-                id,
-                disponivel: disponibilidade[id]
-            }));
-            await fetch(`${SUPABASE_URL}/rest/v1/disponibilidade`, {
-                method: 'POST',
+            await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                method: 'PUT',
                 headers: {
-                    'apikey': SUPABASE_KEY,
-                    'Authorization': `Bearer ${SUPABASE_KEY}`,
                     'Content-Type': 'application/json',
-                    'Prefer': 'resolution=merge-duplicates'
+                    'X-Master-Key': MASTER_KEY
                 },
-                body: JSON.stringify(updates)
+                body: JSON.stringify({ disponibilidade })
             });
             statusEl.className = 'status-msg status-ok';
             statusEl.textContent = 'Salvo! Clientes já veem as alterações.';
