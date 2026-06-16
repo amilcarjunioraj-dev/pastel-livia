@@ -13,872 +13,682 @@
         .tagline { font-size: 13px; color: #999; }
         .screen { display: none; }
         .screen.active { display: block; }
-        .form-section { margin-bottom: 30px; }
-        .form-section-title { font-size: 14px; font-weight: 600; color: #000; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .section-title { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 15px; }
         .form-group { margin-bottom: 15px; }
-        label { display: block; font-size: 13px; font-weight: 500; color: #000; margin-bottom: 6px; }
-        input[type="text"], input[type="password"], textarea { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; font-family: inherit; transition: border-color 0.2s; }
-        input[type="text"]:focus, input[type="password"]:focus, textarea:focus { outline: none; border-color: #000; }
+        label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+        input[type="text"], input[type="number"], input[type="password"], textarea { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; font-family: inherit; }
+        input:focus, textarea:focus { outline: none; border-color: #000; }
         textarea { resize: vertical; min-height: 80px; }
-        .checkbox-group { display: flex; flex-direction: column; gap: 10px; }
-        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #f9f9f9; border-radius: 4px; border: 1px solid #eee; cursor: pointer; transition: all 0.2s; }
-        .checkbox-item:hover { border-color: #ddd; }
-        .checkbox-item input[type="checkbox"], .checkbox-item input[type="radio"] { width: 16px; height: 16px; cursor: pointer; accent-color: #000; }
-        .checkbox-item input:disabled { cursor: not-allowed; opacity: 0.4; }
-        .checkbox-item.unavailable { opacity: 0.5; pointer-events: none; background: #f0f0f0; border-style: dashed; }
+        .check-list { display: flex; flex-direction: column; gap: 10px; }
+        .check-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #f9f9f9; border: 1px solid #eee; border-radius: 4px; cursor: pointer; }
+        .check-item input { width: 16px; height: 16px; accent-color: #000; cursor: pointer; flex-shrink: 0; }
+        .check-item input:disabled { opacity: 0.4; cursor: not-allowed; }
+        .check-item.unavailable { opacity: 0.5; pointer-events: none; background: #f0f0f0; border-style: dashed; }
+        .check-item label { margin: 0; font-weight: 400; cursor: pointer; flex: 1; }
         .unavailable-tag { font-size: 11px; color: #d32f2f; font-weight: 600; margin-left: auto; white-space: nowrap; }
-        .checkbox-item label { margin: 0; font-weight: 400; cursor: pointer; flex: 1; }
-        .ingredient-counter { font-size: 12px; color: #999; margin-top: 8px; text-align: right; }
-        .ingredient-counter.limit { color: #d32f2f; font-weight: 500; }
-        .beverage-row { display: flex; gap: 15px; align-items: center; padding: 10px 12px; background: #f9f9f9; border-radius: 4px; border: 1px solid #eee; margin-bottom: 10px; }
-        .beverage-row label { margin: 0; flex: 1; font-weight: 400; }
-        .quantity-selector { display: flex; align-items: center; gap: 10px; }
-        .qty-btn { width: 32px; height: 32px; border: 1px solid #ddd; background: white; cursor: pointer; border-radius: 4px; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .counter { font-size: 12px; color: #999; text-align: right; margin-top: 8px; }
+        .counter.over { color: #d32f2f; font-weight: 600; }
+        .bev-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #f9f9f9; border: 1px solid #eee; border-radius: 4px; margin-bottom: 10px; }
+        .bev-row label { margin: 0; flex: 1; font-weight: 400; font-size: 13px; }
+        .bev-row input[type="radio"] { width: 16px; height: 16px; accent-color: #000; flex-shrink: 0; }
+        .qty { display: flex; align-items: center; gap: 8px; }
+        .qty-btn { width: 30px; height: 30px; border: 1px solid #ddd; background: white; border-radius: 4px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .qty-btn:hover { border-color: #000; }
-        .qty-display { min-width: 40px; text-align: center; font-weight: 500; }
-        .btn-submit { width: 100%; padding: 12px; background: #000; color: white; border: none; border-radius: 4px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 20px; }
-        .btn-submit:hover { background: #222; }
-        .btn-secondary { width: 100%; padding: 12px; background: white; color: #000; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 10px; }
-        .btn-secondary:hover { border-color: #000; }
-        .product-card { padding: 20px; background: #f9f9f9; border-radius: 4px; border: 1px solid #eee; margin-bottom: 15px; cursor: pointer; transition: all 0.2s; }
-        .product-card:hover { border-color: #000; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .product-card-title { font-weight: 600; margin-bottom: 5px; font-size: 14px; }
-        .product-card-price { color: #666; font-size: 13px; margin-bottom: 5px; }
+        .qty-num { min-width: 24px; text-align: center; font-weight: 500; }
+        .product-card { padding: 18px; background: #f9f9f9; border: 1px solid #eee; border-radius: 4px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; }
+        .product-card:hover { border-color: #000; }
+        .product-card-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+        .product-card-price { color: #666; font-size: 13px; margin-bottom: 4px; }
         .product-card-desc { font-size: 12px; color: #999; }
-        .cart-item { padding: 15px; background: #f9f9f9; border-radius: 4px; border: 1px solid #eee; margin-bottom: 10px; }
-        .cart-item-title { font-weight: 600; margin-bottom: 5px; }
-        .cart-item-details { font-size: 12px; color: #666; margin-bottom: 5px; }
-        .cart-item-price { font-weight: 600; color: #000; }
-        .cart-total { border-top: 2px solid #ddd; padding-top: 15px; margin-top: 20px; display: flex; justify-content: space-between; font-weight: 600; font-size: 16px; }
-        .btn-remove { background: white; border: 1px solid #ddd; color: #d32f2f; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-top: 10px; width: 100%; }
-        .btn-remove:hover { border-color: #d32f2f; }
-        .radio-group { display: flex; flex-direction: column; gap: 0; }
+        .btn { width: 100%; padding: 12px; border: none; border-radius: 4px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 10px; }
+        .btn-black { background: #000; color: white; }
+        .btn-black:hover { background: #222; }
+        .btn-white { background: white; color: #000; border: 1px solid #ddd; }
+        .btn-white:hover { border-color: #000; }
+        .cart-item { padding: 12px; background: #f9f9f9; border: 1px solid #eee; border-radius: 4px; margin-bottom: 8px; }
+        .cart-item-title { font-weight: 600; margin-bottom: 3px; }
+        .cart-item-detail { font-size: 12px; color: #666; margin-bottom: 3px; }
+        .cart-item-price { font-weight: 600; }
+        .btn-remove { background: white; border: 1px solid #ddd; color: #d32f2f; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-top: 6px; width: 100%; }
+        .cart-total { border-top: 2px solid #ddd; padding-top: 12px; margin-top: 15px; display: flex; justify-content: space-between; font-weight: 600; font-size: 15px; }
         .page-back { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #666; cursor: pointer; margin-bottom: 25px; width: fit-content; }
         .page-back:hover { color: #000; }
-        .page-back span { font-size: 18px; }
-        .admin-toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f9f9f9; border-radius: 4px; border: 1px solid #eee; margin-bottom: 8px; }
-        .admin-toggle-name { font-size: 13px; font-weight: 500; }
+        .info-box { padding: 12px; border-radius: 4px; font-size: 13px; margin-top: 12px; }
+        .info-orange { background: #fff3e0; border: 1px solid #ffe082; color: #e65100; }
+        .info-red { background: #ffebee; border: 1px solid #ffcdd2; color: #c62828; }
+        .info-yellow { background: #fff8e1; border: 1px solid #ffe082; }
+        .horario { padding: 10px 12px; background: #f9f9f9; border: 1px solid #eee; border-radius: 4px; font-size: 12px; color: #999; text-align: center; margin-bottom: 20px; }
+        .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f9f9f9; border: 1px solid #eee; border-radius: 4px; margin-bottom: 8px; }
+        .toggle-name { font-size: 13px; font-weight: 500; }
         .toggle-switch { position: relative; display: inline-block; width: 44px; height: 24px; }
         .toggle-switch input { opacity: 0; width: 0; height: 0; }
-        .toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .3s; border-radius: 24px; }
-        .toggle-slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
-        input:checked + .toggle-slider { background-color: #000; }
-        input:checked + .toggle-slider:before { transform: translateX(20px); }
-        .admin-section-title { font-size: 12px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin: 20px 0 10px; }
-        .saving { text-align: center; color: #999; font-size: 12px; margin-top: 10px; }
-        .status-msg { text-align: center; font-size: 12px; padding: 8px; border-radius: 4px; margin-top: 10px; }
-        .status-ok { background: #e8f5e9; color: #2e7d32; }
-        .status-erro { background: #ffebee; color: #c62828; }
+        .toggle-slider { position: absolute; cursor: pointer; top:0; left:0; right:0; bottom:0; background:#ccc; border-radius:24px; transition:.3s; }
+        .toggle-slider:before { position:absolute; content:""; height:18px; width:18px; left:3px; bottom:3px; background:white; border-radius:50%; transition:.3s; }
+        input:checked + .toggle-slider { background:#000; }
+        input:checked + .toggle-slider:before { transform:translateX(20px); }
+        .admin-group-title { font-size: 12px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin: 20px 0 8px; }
+        .extra-box { display: none; margin-top: 15px; padding: 15px; background: #fff8e1; border: 1px solid #ffe082; border-radius: 4px; }
+        .extra-box-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .extra-box-desc { font-size: 12px; color: #888; margin-bottom: 12px; }
+        .extra-counter { font-size: 13px; font-weight: 600; color: #e65100; text-align: right; margin-top: 8px; display: none; }
         @media (max-width: 600px) { .container { padding: 20px; } .logo { font-size: 22px; } }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="header" id="logo-header" onclick="logoClick()">
+
+    <div class="header" onclick="logoClick()">
         <div class="logo">Pastel da Lívia</div>
         <div class="tagline">Faça seu pedido</div>
     </div>
 
     <!-- CARDÁPIO -->
     <div class="screen active" id="screen-cardapio">
-        <div class="form-section">
-            <div class="form-section-title">Cardápio</div>
-            <div id="aviso-offline" style="display:none; padding:15px; background:#ffebee; border:1px solid #ffcdd2; border-radius:4px; margin-bottom:15px; font-size:13px; color:#c62828; text-align:center;">
-                <strong>Estamos fechados no momento.</strong><br>Voltamos em breve!
-            </div>
-            <div style="padding:10px 12px; background:#f9f9f9; border-radius:4px; border:1px solid #eee; margin-bottom:20px; font-size:12px; color:#999; text-align:center;">
-                Funcionamos de <strong>quinta a domingo</strong>, das <strong>19h às 23h</strong>
-            </div>
-            <div class="product-card" onclick="escolherProduto('gourmet')">
-                <div class="product-card-title">Pastel Gourmet</div>
-                <div class="product-card-price">R$ 20,00</div>
-                <div class="product-card-desc">Monte com até 6 ingredientes + tempero. Ingrediente extra: R$ 3,00</div>
-            </div>
-            <div class="product-card" id="card-doce" onclick="escolherProduto('doce')">
-                <div class="product-card-title">Pastelzinho Doce</div>
-                <div class="product-card-price">R$ 10,00</div>
-                <div class="product-card-desc">5 sabores disponíveis</div>
-            </div>
-            <div class="product-card" onclick="escolherProduto('bebida')">
-                <div class="product-card-title">Bebida</div>
-                <div class="product-card-price">R$ 4,00 – R$ 6,00</div>
-                <div class="product-card-desc">Refrigerantes e Guaracamp</div>
-            </div>
-            <div class="product-card" id="card-trio" onclick="escolherProduto('trio')">
-                <div class="product-card-title">Trio da Lívia</div>
-                <div class="product-card-price">R$ 30,00</div>
-                <div class="product-card-desc">Pastel + Pastelzinho + Refrigerante</div>
-            </div>
+        <div class="horario">Funcionamos de <strong>quinta a domingo</strong>, das <strong>19h às 23h</strong></div>
+        <div id="aviso-offline" style="display:none;" class="info-box info-red" style="margin-bottom:15px; text-align:center;">
+            <strong>Estamos fechados no momento.</strong> Voltamos em breve!
         </div>
-        <div class="form-section" id="cart-preview" style="display:none;">
-            <div class="form-section-title">Carrinho</div>
+        <div class="section-title">Cardápio</div>
+        <div class="product-card" onclick="irPara('gourmet')">
+            <div class="product-card-title">Pastel Gourmet</div>
+            <div class="product-card-price">R$ 20,00</div>
+            <div class="product-card-desc">Até 6 ingredientes + tempero. Ingrediente extra: R$ 3,00</div>
+        </div>
+        <div class="product-card" onclick="irPara('bebida')">
+            <div class="product-card-title">Bebida</div>
+            <div class="product-card-price">R$ 4,00 – R$ 6,00</div>
+            <div class="product-card-desc">Guaracamp, Coca-Cola e Coca-Cola Zero</div>
+        </div>
+        <div id="cart-preview" style="display:none; margin-top:30px;">
+            <div class="section-title">Carrinho</div>
             <div id="cart-list"></div>
-            <div class="cart-total"><span>Total:</span><span id="cart-total-price">R$ 0,00</span></div>
-            <button class="btn-submit" onclick="finalizarCompra()">Finalizar Compra</button>
+            <div class="cart-total"><span>Total:</span><span id="cart-total-val">R$ 0,00</span></div>
+            <button class="btn btn-black" onclick="irPara('dados')">Finalizar Compra</button>
         </div>
     </div>
 
     <!-- PASTEL GOURMET -->
     <div class="screen" id="screen-gourmet">
-        <div class="page-back" onclick="voltarCardapio()"><span>&#8592;</span> Voltar ao cardápio</div>
-        <form id="form-gourmet" onsubmit="salvarGourmet(event)">
-            <div class="form-section">
-                <div class="form-section-title">Pastel Gourmet – R$ 20</div>
-                <div class="form-group">
-                    <label>Proteínas</label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item" id="wrap-frango"><input type="checkbox" id="frango" name="ingrediente" value="Frango" onchange="updateIngredientCount()"><label for="frango">Frango</label></div>
-                        <div class="checkbox-item" id="wrap-carne"><input type="checkbox" id="carne" name="ingrediente" value="Carne" onchange="updateIngredientCount()"><label for="carne">Carne</label></div>
-                        <div class="checkbox-item" id="wrap-calabresa"><input type="checkbox" id="calabresa" name="ingrediente" value="Calabresa" onchange="updateIngredientCount()"><label for="calabresa">Calabresa</label></div>
-                        <div class="checkbox-item" id="wrap-carne-seca"><input type="checkbox" id="carne-seca" name="ingrediente" value="Carne Seca" onchange="updateIngredientCount()"><label for="carne-seca">Carne Seca</label></div>
-                        <div class="checkbox-item" id="wrap-linguica"><input type="checkbox" id="linguica" name="ingrediente" value="Linguiça Toscana" onchange="updateIngredientCount()"><label for="linguica">Linguiça Toscana</label></div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Queijos</label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item" id="wrap-mussarela"><input type="checkbox" id="mussarela" name="ingrediente" value="Mussarela" onchange="updateIngredientCount()"><label for="mussarela">Mussarela</label></div>
-                        <div class="checkbox-item" id="wrap-catupiry"><input type="checkbox" id="catupiry" name="ingrediente" value="Catupiry" onchange="updateIngredientCount()"><label for="catupiry">Catupiry</label></div>
-                        <div class="checkbox-item" id="wrap-cheddar"><input type="checkbox" id="cheddar" name="ingrediente" value="Cheddar" onchange="updateIngredientCount()"><label for="cheddar">Cheddar</label></div>
+        <div class="page-back" onclick="voltarCardapio()">&#8592; Voltar ao cardápio</div>
+        <form onsubmit="addGourmet(event)">
+            <div class="section-title">Pastel Gourmet – R$ 20,00</div>
 
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Complementos</label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item" id="wrap-bacon"><input type="checkbox" id="bacon" name="ingrediente" value="Bacon" onchange="updateIngredientCount()"><label for="bacon">Bacon</label></div>
-                        <div class="checkbox-item" id="wrap-presunto"><input type="checkbox" id="presunto" name="ingrediente" value="Presunto" onchange="updateIngredientCount()"><label for="presunto">Presunto</label></div>
-                        <div class="checkbox-item" id="wrap-milho"><input type="checkbox" id="milho" name="ingrediente" value="Milho" onchange="updateIngredientCount()"><label for="milho">Milho</label></div>
-                        <div class="checkbox-item" id="wrap-palmito"><input type="checkbox" id="palmito" name="ingrediente" value="Palmito" onchange="updateIngredientCount()"><label for="palmito">Palmito</label></div>
-                        <div class="checkbox-item" id="wrap-ervilha"><input type="checkbox" id="ervilha" name="ingrediente" value="Ervilha" onchange="updateIngredientCount()"><label for="ervilha">Ervilha</label></div>
-                        <div class="checkbox-item" id="wrap-tomate"><input type="checkbox" id="tomate" name="ingrediente" value="Tomate" onchange="updateIngredientCount()"><label for="tomate">Tomate</label></div>
-                        <div class="checkbox-item" id="wrap-cebola"><input type="checkbox" id="cebola" name="ingrediente" value="Cebola" onchange="updateIngredientCount()"><label for="cebola">Cebola</label></div>
-                        <div class="checkbox-item" id="wrap-cebola-roxa"><input type="checkbox" id="cebola-roxa" name="ingrediente" value="Cebola Roxa" onchange="updateIngredientCount()"><label for="cebola-roxa">Cebola Roxa</label></div>
-                        <div class="checkbox-item" id="wrap-azeitona"><input type="checkbox" id="azeitona" name="ingrediente" value="Azeitona" onchange="updateIngredientCount()"><label for="azeitona">Azeitona</label></div>
-                        <div class="checkbox-item" id="wrap-ovo"><input type="checkbox" id="ovo" name="ingrediente" value="Ovo Cozido" onchange="updateIngredientCount()"><label for="ovo">Ovo Cozido</label></div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Temperos</label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item"><input type="checkbox" id="oregano" name="tempero" value="Orégano"><label for="oregano">Orégano</label></div>
-                        <div class="checkbox-item"><input type="checkbox" id="salsa" name="tempero" value="Salsa"><label for="salsa">Salsa</label></div>
-                    </div>
-                </div>
-                <div class="ingredient-counter" id="ingredientCounter">0 / 6 ingredientes</div>
-            </div>
-            <button type="submit" class="btn-submit">Adicionar ao carrinho</button>
-            <button type="button" class="btn-secondary" onclick="voltarCardapio()">Cancelar</button>
-        </form>
-    </div>
-
-    <!-- PASTELZINHO DOCE -->
-    <div class="screen" id="screen-doce">
-        <div class="page-back" onclick="voltarCardapio()"><span>&#8592;</span> Voltar ao cardápio</div>
-        <form id="form-doce" onsubmit="salvarDoce(event)">
-            <div class="form-section">
-                <div class="form-section-title">Pastelzinho Doce – R$ 10</div>
-                <div class="form-group">
-                    <label>Escolha o sabor</label>
-                    <div class="radio-group">
-                        <div class="checkbox-item" id="wrap-sabor-romeu-julieta"><input type="radio" id="romeu" name="sabor" value="Romeu e Julieta"><label for="romeu">Romeu e Julieta</label></div>
-                        <div class="checkbox-item" id="wrap-sabor-banana-canela"><input type="radio" id="banana-canela" name="sabor" value="Banana com Canela"><label for="banana-canela">Banana com Canela</label></div>
-                        <div class="checkbox-item" id="wrap-sabor-banana-chocolate"><input type="radio" id="banana-choco" name="sabor" value="Banana com Chocolate"><label for="banana-choco">Banana com Chocolate</label></div>
-                        <div class="checkbox-item" id="wrap-sabor-chocolate-confete"><input type="radio" id="choco-confete" name="sabor" value="Chocolate com Confete"><label for="choco-confete">Chocolate com Confete</label></div>
-                        <div class="checkbox-item" id="wrap-sabor-doce-leite"><input type="radio" id="doce-leite" name="sabor" value="Doce de Leite"><label for="doce-leite">Doce de Leite</label></div>
-                    </div>
+            <div class="form-group">
+                <label>Proteínas</label>
+                <div class="check-list">
+                    <div class="check-item" id="wrap-frango"><input type="checkbox" id="frango" name="ing" value="Frango" onchange="contarIng()"><label for="frango">Frango</label></div>
+                    <div class="check-item" id="wrap-carne"><input type="checkbox" id="carne" name="ing" value="Carne" onchange="contarIng()"><label for="carne">Carne</label></div>
+                    <div class="check-item" id="wrap-calabresa"><input type="checkbox" id="calabresa" name="ing" value="Calabresa" onchange="contarIng()"><label for="calabresa">Calabresa</label></div>
+                    <div class="check-item" id="wrap-carne-seca"><input type="checkbox" id="carne-seca" name="ing" value="Carne Seca" onchange="contarIng()"><label for="carne-seca">Carne Seca</label></div>
+                    <div class="check-item" id="wrap-linguica"><input type="checkbox" id="linguica" name="ing" value="Linguiça Toscana" onchange="contarIng()"><label for="linguica">Linguiça Toscana</label></div>
                 </div>
             </div>
-            <button type="submit" class="btn-submit">Adicionar ao carrinho</button>
-            <button type="button" class="btn-secondary" onclick="voltarCardapio()">Cancelar</button>
+
+            <div class="form-group">
+                <label>Queijos</label>
+                <div class="check-list">
+                    <div class="check-item" id="wrap-mussarela"><input type="checkbox" id="mussarela" name="ing" value="Mussarela" onchange="contarIng()"><label for="mussarela">Mussarela</label></div>
+                    <div class="check-item" id="wrap-catupiry"><input type="checkbox" id="catupiry" name="ing" value="Catupiry" onchange="contarIng()"><label for="catupiry">Catupiry</label></div>
+                    <div class="check-item" id="wrap-cheddar"><input type="checkbox" id="cheddar" name="ing" value="Cheddar" onchange="contarIng()"><label for="cheddar">Cheddar</label></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Complementos</label>
+                <div class="check-list">
+                    <div class="check-item" id="wrap-bacon"><input type="checkbox" id="bacon" name="ing" value="Bacon" onchange="contarIng()"><label for="bacon">Bacon</label></div>
+                    <div class="check-item" id="wrap-presunto"><input type="checkbox" id="presunto" name="ing" value="Presunto" onchange="contarIng()"><label for="presunto">Presunto</label></div>
+                    <div class="check-item" id="wrap-milho"><input type="checkbox" id="milho" name="ing" value="Milho" onchange="contarIng()"><label for="milho">Milho</label></div>
+                    <div class="check-item" id="wrap-palmito"><input type="checkbox" id="palmito" name="ing" value="Palmito" onchange="contarIng()"><label for="palmito">Palmito</label></div>
+                    <div class="check-item" id="wrap-ervilha"><input type="checkbox" id="ervilha" name="ing" value="Ervilha" onchange="contarIng()"><label for="ervilha">Ervilha</label></div>
+                    <div class="check-item" id="wrap-tomate"><input type="checkbox" id="tomate" name="ing" value="Tomate" onchange="contarIng()"><label for="tomate">Tomate</label></div>
+                    <div class="check-item" id="wrap-cebola"><input type="checkbox" id="cebola" name="ing" value="Cebola" onchange="contarIng()"><label for="cebola">Cebola</label></div>
+                    <div class="check-item" id="wrap-cebola-roxa"><input type="checkbox" id="cebola-roxa" name="ing" value="Cebola Roxa" onchange="contarIng()"><label for="cebola-roxa">Cebola Roxa</label></div>
+                    <div class="check-item" id="wrap-azeitona"><input type="checkbox" id="azeitona" name="ing" value="Azeitona" onchange="contarIng()"><label for="azeitona">Azeitona</label></div>
+                    <div class="check-item" id="wrap-ovo"><input type="checkbox" id="ovo" name="ing" value="Ovo Cozido" onchange="contarIng()"><label for="ovo">Ovo Cozido</label></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Temperos</label>
+                <div class="check-list">
+                    <div class="check-item"><input type="checkbox" id="oregano" name="tempero" value="Orégano"><label for="oregano">Orégano</label></div>
+                    <div class="check-item"><input type="checkbox" id="salsa" name="tempero" value="Salsa"><label for="salsa">Salsa</label></div>
+                </div>
+            </div>
+
+            <div class="counter" id="ing-counter">0 / 6 ingredientes</div>
+
+            <!-- EXTRAS -->
+            <div class="extra-box" id="extra-box">
+                <div class="extra-box-title">Ingredientes extras — R$ 3,00 cada</div>
+                <div class="extra-box-desc">Selecione os ingredientes adicionais.</div>
+                <div class="check-list">
+                    <div class="check-item"><input type="checkbox" name="extra" value="Frango" onchange="contarExtra()"><label>Frango</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Carne" onchange="contarExtra()"><label>Carne</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Calabresa" onchange="contarExtra()"><label>Calabresa</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Carne Seca" onchange="contarExtra()"><label>Carne Seca</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Linguiça Toscana" onchange="contarExtra()"><label>Linguiça Toscana</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Mussarela" onchange="contarExtra()"><label>Mussarela</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Catupiry" onchange="contarExtra()"><label>Catupiry</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Cheddar" onchange="contarExtra()"><label>Cheddar</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Bacon" onchange="contarExtra()"><label>Bacon</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Presunto" onchange="contarExtra()"><label>Presunto</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Milho" onchange="contarExtra()"><label>Milho</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Palmito" onchange="contarExtra()"><label>Palmito</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Ervilha" onchange="contarExtra()"><label>Ervilha</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Tomate" onchange="contarExtra()"><label>Tomate</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Cebola" onchange="contarExtra()"><label>Cebola</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Cebola Roxa" onchange="contarExtra()"><label>Cebola Roxa</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Azeitona" onchange="contarExtra()"><label>Azeitona</label></div>
+                    <div class="check-item"><input type="checkbox" name="extra" value="Ovo Cozido" onchange="contarExtra()"><label>Ovo Cozido</label></div>
+                </div>
+                <div class="extra-counter" id="extra-counter"></div>
+            </div>
+
+            <button type="submit" class="btn btn-black" style="margin-top:20px;">Adicionar ao carrinho</button>
+            <button type="button" class="btn btn-white" onclick="voltarCardapio()">Cancelar</button>
         </form>
     </div>
 
     <!-- BEBIDA -->
     <div class="screen" id="screen-bebida">
-        <div class="page-back" onclick="voltarCardapio()"><span>&#8592;</span> Voltar ao cardápio</div>
-        <form id="form-bebida" onsubmit="salvarBebida(event)">
-            <div class="form-section">
-                <div class="form-section-title">Bebida</div>
-                <div class="form-group">
-                    <label>Escolha a bebida e a quantidade</label>
-                    <div class="beverage-row" id="wrap-beb-guaracamp"><input type="radio" id="guaracamp" name="bebida" value="Guaracamp|4"><label for="guaracamp" style="margin:0;">Guaracamp – R$ 4</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('guaracamp',-1)">−</button><div class="qty-display" id="qty-guaracamp">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('guaracamp',1)">+</button></div></div>
-                    <div class="beverage-row" id="wrap-beb-coca-cola"><input type="radio" id="coca" name="bebida" value="Coca-Cola|6"><label for="coca" style="margin:0;">Coca-Cola – R$ 6</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('coca',-1)">−</button><div class="qty-display" id="qty-coca">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('coca',1)">+</button></div></div>
-                    <div class="beverage-row" id="wrap-beb-coca-cola-zero"><input type="radio" id="coca-zero" name="bebida" value="Coca-Cola Zero|6"><label for="coca-zero" style="margin:0;">Coca-Cola Zero – R$ 6</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('coca-zero',-1)">−</button><div class="qty-display" id="qty-coca-zero">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('coca-zero',1)">+</button></div></div>
-
+        <div class="page-back" onclick="voltarCardapio()">&#8592; Voltar ao cardápio</div>
+        <form onsubmit="addBebida(event)">
+            <div class="section-title">Bebida</div>
+            <div class="form-group">
+                <label>Escolha a bebida e a quantidade</label>
+                <div class="bev-row" id="wrap-bev-guaracamp">
+                    <input type="radio" id="bev-guaracamp" name="bev" value="Guaracamp|4" required>
+                    <label for="bev-guaracamp">Guaracamp – R$ 4,00</label>
+                    <div class="qty">
+                        <button type="button" class="qty-btn" onclick="qtyBev('guaracamp',-1)">−</button>
+                        <span class="qty-num" id="qty-guaracamp">1</span>
+                        <button type="button" class="qty-btn" onclick="qtyBev('guaracamp',1)">+</button>
+                    </div>
+                </div>
+                <div class="bev-row" id="wrap-bev-coca">
+                    <input type="radio" id="bev-coca" name="bev" value="Coca-Cola|6">
+                    <label for="bev-coca">Coca-Cola – R$ 6,00</label>
+                    <div class="qty">
+                        <button type="button" class="qty-btn" onclick="qtyBev('coca',-1)">−</button>
+                        <span class="qty-num" id="qty-coca">1</span>
+                        <button type="button" class="qty-btn" onclick="qtyBev('coca',1)">+</button>
+                    </div>
+                </div>
+                <div class="bev-row" id="wrap-bev-coca-zero">
+                    <input type="radio" id="bev-coca-zero" name="bev" value="Coca-Cola Zero|6">
+                    <label for="bev-coca-zero">Coca-Cola Zero – R$ 6,00</label>
+                    <div class="qty">
+                        <button type="button" class="qty-btn" onclick="qtyBev('coca-zero',-1)">−</button>
+                        <span class="qty-num" id="qty-coca-zero">1</span>
+                        <button type="button" class="qty-btn" onclick="qtyBev('coca-zero',1)">+</button>
+                    </div>
                 </div>
             </div>
-            <button type="submit" class="btn-submit">Adicionar ao carrinho</button>
-            <button type="button" class="btn-secondary" onclick="voltarCardapio()">Cancelar</button>
-        </form>
-    </div>
-
-    <!-- TRIO -->
-    <div class="screen" id="screen-trio">
-        <div class="page-back" onclick="voltarCardapio()"><span>&#8592;</span> Voltar ao cardápio</div>
-        <form id="form-trio" onsubmit="salvarTrio(event)">
-            <div class="form-section">
-                <div class="form-section-title">Trio da Lívia – R$ 30</div>
-                <p style="font-size:13px;color:#666;margin-bottom:20px;">Pastel Gourmet + Pastelzinho Doce + Refrigerante</p>
-                <div class="form-group"><label>Pastel – Proteínas</label><div class="checkbox-group">
-                    <div class="checkbox-item" id="wrap-trio-frango"><input type="checkbox" id="trio-frango" name="trio-ing" value="Frango" onchange="updateTrioCount()"><label for="trio-frango">Frango</label></div>
-                    <div class="checkbox-item" id="wrap-trio-carne"><input type="checkbox" id="trio-carne" name="trio-ing" value="Carne" onchange="updateTrioCount()"><label for="trio-carne">Carne</label></div>
-                    <div class="checkbox-item" id="wrap-trio-calabresa"><input type="checkbox" id="trio-calabresa" name="trio-ing" value="Calabresa" onchange="updateTrioCount()"><label for="trio-calabresa">Calabresa</label></div>
-                    <div class="checkbox-item" id="wrap-trio-linguica"><input type="checkbox" id="trio-linguica" name="trio-ing" value="Linguiça Toscana" onchange="updateTrioCount()"><label for="trio-linguica">Linguiça Toscana</label></div>
-                </div></div>
-                <div class="form-group"><label>Pastel – Queijos</label><div class="checkbox-group">
-                    <div class="checkbox-item" id="wrap-trio-mussarela"><input type="checkbox" id="trio-mussarela" name="trio-ing" value="Mussarela" onchange="updateTrioCount()"><label for="trio-mussarela">Mussarela</label></div>
-                    <div class="checkbox-item" id="wrap-trio-catupiry"><input type="checkbox" id="trio-catupiry" name="trio-ing" value="Catupiry" onchange="updateTrioCount()"><label for="trio-catupiry">Catupiry</label></div>
-                    <div class="checkbox-item" id="wrap-trio-cheddar"><input type="checkbox" id="trio-cheddar" name="trio-ing" value="Cheddar" onchange="updateTrioCount()"><label for="trio-cheddar">Cheddar</label></div>
-                    <div class="checkbox-item" id="wrap-trio-cream"><input type="checkbox" id="trio-cream" name="trio-ing" value="Cream Cheese" onchange="updateTrioCount()"><label for="trio-cream">Cream Cheese</label></div>
-                </div></div>
-                <div class="form-group"><label>Pastel – Complementos</label><div class="checkbox-group">
-                    <div class="checkbox-item" id="wrap-trio-bacon"><input type="checkbox" id="trio-bacon" name="trio-ing" value="Bacon" onchange="updateTrioCount()"><label for="trio-bacon">Bacon</label></div>
-                    <div class="checkbox-item" id="wrap-trio-presunto"><input type="checkbox" id="trio-presunto" name="trio-ing" value="Presunto" onchange="updateTrioCount()"><label for="trio-presunto">Presunto</label></div>
-                    <div class="checkbox-item" id="wrap-trio-milho"><input type="checkbox" id="trio-milho" name="trio-ing" value="Milho" onchange="updateTrioCount()"><label for="trio-milho">Milho</label></div>
-                    <div class="checkbox-item" id="wrap-trio-palmito"><input type="checkbox" id="trio-palmito" name="trio-ing" value="Palmito" onchange="updateTrioCount()"><label for="trio-palmito">Palmito</label></div>
-                    <div class="checkbox-item" id="wrap-trio-tomate"><input type="checkbox" id="trio-tomate" name="trio-ing" value="Tomate" onchange="updateTrioCount()"><label for="trio-tomate">Tomate</label></div>
-                    <div class="checkbox-item" id="wrap-trio-cebola"><input type="checkbox" id="trio-cebola" name="trio-ing" value="Cebola" onchange="updateTrioCount()"><label for="trio-cebola">Cebola</label></div>
-                    <div class="checkbox-item" id="wrap-trio-cebola-roxa"><input type="checkbox" id="trio-cebola-roxa" name="trio-ing" value="Cebola Roxa" onchange="updateTrioCount()"><label for="trio-cebola-roxa">Cebola Roxa</label></div>
-                    <div class="checkbox-item" id="wrap-trio-azeitona"><input type="checkbox" id="trio-azeitona" name="trio-ing" value="Azeitona" onchange="updateTrioCount()"><label for="trio-azeitona">Azeitona</label></div>
-                    <div class="checkbox-item" id="wrap-trio-ovo"><input type="checkbox" id="trio-ovo" name="trio-ing" value="Ovo Cozido" onchange="updateTrioCount()"><label for="trio-ovo">Ovo Cozido</label></div>
-                </div></div>
-                <div class="form-group"><label>Pastel – Temperos</label><div class="checkbox-group">
-                    <div class="checkbox-item"><input type="checkbox" id="trio-oregano" name="trio-tempero" value="Orégano"><label for="trio-oregano">Orégano</label></div>
-                    <div class="checkbox-item"><input type="checkbox" id="trio-salsa" name="trio-tempero" value="Salsa"><label for="trio-salsa">Salsa</label></div>
-                </div></div>
-                <div class="ingredient-counter" id="trioCounter">0 / 6 ingredientes</div>
-                <div class="form-group" style="margin-top:20px;"><label>Pastelzinho Doce</label><div class="radio-group">
-                    <div class="checkbox-item"><input type="radio" id="trio-romeu" name="trio-sabor" value="Romeu e Julieta"><label for="trio-romeu">Romeu e Julieta</label></div>
-                    <div class="checkbox-item"><input type="radio" id="trio-banana-canela" name="trio-sabor" value="Banana com Canela"><label for="trio-banana-canela">Banana com Canela</label></div>
-                    <div class="checkbox-item"><input type="radio" id="trio-banana-choco" name="trio-sabor" value="Banana com Chocolate"><label for="trio-banana-choco">Banana com Chocolate</label></div>
-                    <div class="checkbox-item"><input type="radio" id="trio-choco-confete" name="trio-sabor" value="Chocolate com Confete"><label for="trio-choco-confete">Chocolate com Confete</label></div>
-                    <div class="checkbox-item"><input type="radio" id="trio-doce-leite" name="trio-sabor" value="Doce de Leite"><label for="trio-doce-leite">Doce de Leite</label></div>
-                </div></div>
-                <div class="form-group" style="margin-top:20px;"><label>Refrigerante</label><div class="radio-group">
-                    <div class="checkbox-item"><input type="radio" id="trio-guaracamp" name="trio-bebida" value="Guaracamp"><label for="trio-guaracamp">Guaracamp</label></div>
-                    <div class="checkbox-item"><input type="radio" id="trio-coca" name="trio-bebida" value="Coca-Cola"><label for="trio-coca">Coca-Cola</label></div>
-                    <div class="checkbox-item"><input type="radio" id="trio-coca-zero" name="trio-bebida" value="Coca-Cola Zero"><label for="trio-coca-zero">Coca-Cola Zero</label></div>
-                    <div class="checkbox-item"><input type="radio" id="trio-guarana" name="trio-bebida" value="Guaraná Antarctica"><label for="trio-guarana">Guaraná Antarctica</label></div>
-                    <div class="checkbox-item"><input type="radio" id="trio-guarana-zero" name="trio-bebida" value="Guaraná Antarctica Zero"><label for="trio-guarana-zero">Guaraná Antarctica Zero</label></div>
-                </div></div>
-            </div>
-            <button type="submit" class="btn-submit">Adicionar ao carrinho</button>
-            <button type="button" class="btn-secondary" onclick="voltarCardapio()">Cancelar</button>
+            <button type="submit" class="btn btn-black">Adicionar ao carrinho</button>
+            <button type="button" class="btn btn-white" onclick="voltarCardapio()">Cancelar</button>
         </form>
     </div>
 
     <!-- DADOS DO CLIENTE -->
     <div class="screen" id="screen-dados">
-        <div class="page-back" onclick="voltarCardapio()"><span>&#8592;</span> Voltar ao carrinho</div>
-        <form id="form-dados" onsubmit="enviarWhatsApp(event)">
-            <div class="form-section">
-                <div class="form-section-title">Seus dados</div>
-                <div class="form-group"><label>Nome *</label><input type="text" id="nome" required></div>
-                <div class="form-group"><label>Bloco *</label><input type="text" id="bloco" placeholder="Ex: A, B, C" required></div>
-                <div class="form-group"><label>Apartamento *</label><input type="text" id="apto" placeholder="Ex: 101, 202" required></div>
-                <div class="form-group"><label>Observações</label><textarea id="observacoes" placeholder="Ex: Sem cebola..."></textarea></div>
+        <div class="page-back" onclick="voltarCardapio()">&#8592; Voltar ao carrinho</div>
+        <form onsubmit="enviarWhatsApp(event)">
+            <div class="section-title">Seus dados</div>
+            <div class="form-group"><label>Nome *</label><input type="text" id="nome" required></div>
+            <div class="form-group"><label>Bloco *</label><input type="text" id="bloco" placeholder="Ex: A, B, C" required></div>
+            <div class="form-group"><label>Apartamento *</label><input type="text" id="apto" placeholder="Ex: 101" required></div>
+            <div class="form-group"><label>Observações</label><textarea id="obs" placeholder="Ex: Sem cebola..."></textarea></div>
+
+            <div class="section-title" style="margin-top:20px;">Pagamento</div>
+            <div class="check-list">
+                <div class="check-item"><input type="radio" id="pag-pix" name="pag" value="PIX" checked onchange="onPag()"><label for="pag-pix">PIX</label></div>
+                <div class="check-item"><input type="radio" id="pag-dinheiro" name="pag" value="Dinheiro" onchange="onPag()"><label for="pag-dinheiro">Dinheiro na Entrega</label></div>
+                <div class="check-item"><input type="radio" id="pag-cartao" name="pag" value="Cartão" onchange="onPag()"><label for="pag-cartao">Cartão (Máquina)</label></div>
             </div>
-            <div class="form-section">
-                <div class="form-section-title">Pagamento</div>
-                <div class="radio-group">
-                    <div class="checkbox-item"><input type="radio" id="pix" name="pagamento" value="PIX" checked onchange="onPagamentoChange()"><label for="pix">PIX</label></div>
-                    <div class="checkbox-item"><input type="radio" id="dinheiro" name="pagamento" value="Dinheiro na Entrega" onchange="onPagamentoChange()"><label for="dinheiro">Dinheiro na Entrega</label></div>
-                    <div class="checkbox-item"><input type="radio" id="cartao" name="pagamento" value="Cartão (Máquina)" onchange="onPagamentoChange()"><label for="cartao">Cartão (Máquina)</label></div>
-                </div>
 
-                <!-- PIX INFO -->
-                <div id="pix-info" style="margin-top:15px; padding:12px; background:#f9f9f9; border-radius:4px; border:1px solid #eee; font-size:13px;">
-                    <strong>Chave PIX:</strong> 21964983008<br>
-                    <span style="color:#e65100; margin-top:6px; display:block;">Após o pedido, envie o comprovante pelo WhatsApp. O pedido só será confirmado após a confirmação do pagamento.</span>
-                </div>
+            <div id="info-pix" class="info-box info-orange" style="margin-top:12px;">
+                <strong>Chave PIX:</strong> 21964983008<br>
+                <span style="margin-top:4px;display:block;">Envie o comprovante pelo WhatsApp após o pedido. Pedido confirmado após pagamento.</span>
+            </div>
 
-                <!-- DINHEIRO INFO -->
-                <div id="dinheiro-info" style="display:none; margin-top:15px;">
-                    <div style="padding:12px; background:#f9f9f9; border-radius:4px; border:1px solid #eee;">
-                        <div class="form-group" style="margin-bottom:10px;">
-                            <label>Vai precisar de troco?</label>
-                            <div class="radio-group" style="flex-direction:row; gap:15px; margin-top:8px;">
-                                <div class="checkbox-item" style="flex:1;">
-                                    <input type="radio" id="troco-sim" name="troco" value="sim" onchange="onTrocoChange()">
-                                    <label for="troco-sim">Sim</label>
-                                </div>
-                                <div class="checkbox-item" style="flex:1;">
-                                    <input type="radio" id="troco-nao" name="troco" value="nao" onchange="onTrocoChange()">
-                                    <label for="troco-nao">Não</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="troco-valor-box" style="display:none;">
-                            <label>Troco para quanto?</label>
-                            <input type="number" id="troco-valor" placeholder="Ex: 50" style="margin-top:6px;" oninput="calcularTroco()">
-                            <div id="troco-resultado" style="display:none; margin-top:8px; padding:10px; background:#fff3e0; border:1px solid #ffe0b2; border-radius:4px; font-size:13px; color:#e65100;">
-                            </div>
+            <div id="info-dinheiro" style="display:none; margin-top:12px;">
+                <div class="info-box info-orange">
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label>Vai precisar de troco?</label>
+                        <div style="display:flex; gap:10px; margin-top:8px;">
+                            <div class="check-item" style="flex:1;"><input type="radio" id="troco-sim" name="troco" value="sim" onchange="onTroco()"><label for="troco-sim">Sim</label></div>
+                            <div class="check-item" style="flex:1;"><input type="radio" id="troco-nao" name="troco" value="nao" onchange="onTroco()"><label for="troco-nao">Não</label></div>
                         </div>
                     </div>
-                </div>
-
-                <!-- CARTÃO INFO -->
-                <div id="cartao-info" style="display:none; margin-top:15px; padding:12px; background:#f9f9f9; border-radius:4px; border:1px solid #eee; font-size:13px;">
-                    <span style="color:#e65100;">Pagamento na entrega com máquina de cartão.</span>
+                    <div id="troco-campo" style="display:none;">
+                        <label>Troco para quanto? (R$)</label>
+                        <input type="number" id="troco-val" placeholder="Ex: 50" oninput="calcTroco()" style="margin-top:6px;">
+                        <div id="troco-resultado" style="display:none; margin-top:8px; font-weight:600;"></div>
+                    </div>
                 </div>
             </div>
-            <button type="submit" class="btn-submit">Enviar para WhatsApp</button>
+
+            <div id="info-cartao" style="display:none; margin-top:12px;" class="info-box info-orange">
+                Pagamento na entrega com máquina de cartão.<br>
+                <strong>⚠️ Lembre-se de levar a máquina de cartão.</strong>
+            </div>
+
+            <button type="submit" class="btn btn-black" style="margin-top:20px;">Enviar para WhatsApp</button>
         </form>
     </div>
 
     <!-- ADMIN LOGIN -->
     <div class="screen" id="screen-admin-login">
-        <div class="page-back" onclick="voltarCardapio()"><span>&#8592;</span> Voltar</div>
-        <div class="form-section">
-            <div class="form-section-title">Acesso Restrito</div>
-            <div class="form-group">
-                <label>Senha</label>
-                <input type="password" id="admin-senha" placeholder="Digite a senha">
-            </div>
-            <div id="senha-erro" style="color:#d32f2f;font-size:12px;display:none;margin-top:5px;">Senha incorreta.</div>
-            <button class="btn-submit" onclick="entrarAdmin()">Entrar</button>
+        <div class="page-back" onclick="voltarCardapio()">&#8592; Voltar</div>
+        <div class="section-title">Acesso Restrito</div>
+        <div class="form-group">
+            <label>Senha</label>
+            <input type="password" id="admin-senha" placeholder="Digite a senha">
         </div>
+        <div id="senha-erro" style="color:#d32f2f;font-size:12px;display:none;margin-top:4px;">Senha incorreta.</div>
+        <button class="btn btn-black" onclick="entrarAdmin()">Entrar</button>
     </div>
 
     <!-- ADMIN PAINEL -->
     <div class="screen" id="screen-admin">
-        <div class="page-back" onclick="voltarCardapio()"><span>&#8592;</span> Voltar ao cardápio</div>
-        <div class="form-section">
-            <div class="form-section-title">Painel Admin</div>
-            <p style="font-size:13px;color:#999;margin-bottom:20px;">Desative para marcar como indisponível. Salva automaticamente.</p>
+        <div class="page-back" onclick="voltarCardapio()">&#8592; Voltar ao cardápio</div>
+        <div class="section-title">Painel Admin</div>
+        <p style="font-size:13px;color:#999;margin-bottom:20px;">Desative o toggle para marcar como indisponível. Salva automaticamente.</p>
 
-            <div style="display:flex; justify-content:space-between; align-items:center; padding:15px; border-radius:4px; border:2px solid #000; margin-bottom:20px;">
-                <div>
-                    <div style="font-weight:600; font-size:14px;">Status do App</div>
-                    <div id="status-label" style="font-size:12px; color:#999; margin-top:2px;">Online — aceitando pedidos</div>
-                </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:15px; border:2px solid #000; border-radius:4px; margin-bottom:20px;">
+            <div>
+                <div style="font-weight:600;">Status do App</div>
+                <div id="status-label" style="font-size:12px;color:#999;margin-top:2px;">Online — aceitando pedidos</div>
+            </div>
+            <label class="toggle-switch">
+                <input type="checkbox" id="toggle-online" checked onchange="salvarOnline(this.checked)">
+                <span class="toggle-slider"></span>
+            </label>
+        </div>
+
+        <div id="admin-status" style="font-size:12px;color:#999;text-align:center;display:none;margin-bottom:10px;"></div>
+
+        <div class="admin-group-title">Proteínas</div>
+        <div id="admin-proteinas"></div>
+        <div class="admin-group-title">Queijos</div>
+        <div id="admin-queijos"></div>
+        <div class="admin-group-title">Complementos</div>
+        <div id="admin-complementos"></div>
+        <div class="admin-group-title">Bebidas</div>
+        <div id="admin-bebidas"></div>
+    </div>
+
+</div>
+<script>
+// ── CONFIG ──────────────────────────────────────
+const MASTER_KEY = '$2a$10$3ZCCeWIHO9empTb2BsrRTuhzUusBilcV8A1lzwGW9VEwAtUDc8Wxy';
+const BIN_ID     = '6a2a23dcda38895dfeaac841';
+const SENHA      = 'livia2025';
+
+// ── DADOS ───────────────────────────────────────
+const GRUPOS = {
+    proteinas:    { label:'Proteínas', items: { frango:'Frango', carne:'Carne', calabresa:'Calabresa', 'carne-seca':'Carne Seca', linguica:'Linguiça Toscana' }},
+    queijos:      { label:'Queijos',   items: { mussarela:'Mussarela', catupiry:'Catupiry', cheddar:'Cheddar' }},
+    complementos: { label:'Compl.',    items: { bacon:'Bacon', presunto:'Presunto', milho:'Milho', palmito:'Palmito', ervilha:'Ervilha', tomate:'Tomate', cebola:'Cebola', 'cebola-roxa':'Cebola Roxa', azeitona:'Azeitona', ovo:'Ovo Cozido' }},
+    bebidas:      { label:'Bebidas',   items: { 'bev-guaracamp':'Guaracamp', 'bev-coca':'Coca-Cola', 'bev-coca-zero':'Coca-Cola Zero' }}
+};
+
+let disp = {};
+let appOnline = true;
+let cart = [];
+let bevQty = { guaracamp:1, coca:1, 'coca-zero':1 };
+
+// Inicializar disponibilidade tudo true
+Object.values(GRUPOS).forEach(g => Object.keys(g.items).forEach(id => disp[id] = true));
+
+// ── JSONBIN ─────────────────────────────────────
+async function carregarDados() {
+    try {
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+            headers: { 'X-Master-Key': MASTER_KEY }
+        });
+        const data = await res.json();
+        if (data.record) {
+            if (data.record.disp) disp = { ...disp, ...data.record.disp };
+            if (typeof data.record.online === 'boolean') {
+                appOnline = data.record.online;
+            }
+        }
+    } catch(e) {}
+    aplicarDisp();
+    aplicarOnline();
+}
+
+async function salvarDados() {
+    const statusEl = document.getElementById('admin-status');
+    statusEl.style.display = 'block';
+    statusEl.textContent = 'Salvando...';
+    try {
+        await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Master-Key': MASTER_KEY },
+            body: JSON.stringify({ disp, online: appOnline })
+        });
+        statusEl.textContent = 'Salvo! Clientes já veem as alterações.';
+        setTimeout(() => statusEl.style.display = 'none', 3000);
+    } catch(e) {
+        statusEl.textContent = 'Erro ao salvar.';
+    }
+}
+
+// ── DISPONIBILIDADE ─────────────────────────────
+function aplicarDisp() {
+    // Ingredientes do pastel
+    Object.values(GRUPOS).forEach(g => {
+        Object.keys(g.items).forEach(id => {
+            // Pastel gourmet
+            const wrap = document.getElementById(`wrap-${id}`);
+            const inp  = document.getElementById(id);
+            if (wrap && inp) {
+                if (!disp[id]) {
+                    wrap.classList.add('unavailable');
+                    inp.checked = false;
+                    if (!wrap.querySelector('.unavailable-tag')) {
+                        const t = document.createElement('span');
+                        t.className = 'unavailable-tag';
+                        t.textContent = 'Indisponível';
+                        wrap.appendChild(t);
+                    }
+                } else {
+                    wrap.classList.remove('unavailable');
+                    const t = wrap.querySelector('.unavailable-tag');
+                    if (t) t.remove();
+                }
+            }
+            // Bebidas
+            const wrapBev = document.getElementById(`wrap-${id}`);
+            if (id.startsWith('bev-') && wrapBev) {
+                wrapBev.style.opacity = disp[id] ? '' : '0.5';
+                wrapBev.style.pointerEvents = disp[id] ? '' : 'none';
+            }
+        });
+    });
+    contarIng();
+}
+
+// ── ONLINE/OFFLINE ──────────────────────────────
+function aplicarOnline() {
+    const aviso = document.getElementById('aviso-offline');
+    const cards = document.querySelectorAll('.product-card');
+    if (!appOnline) {
+        aviso.style.display = 'block';
+        cards.forEach(c => { c.style.opacity='0.4'; c.style.pointerEvents='none'; });
+    } else {
+        aviso.style.display = 'none';
+        cards.forEach(c => { c.style.opacity=''; c.style.pointerEvents=''; });
+        aplicarDisp();
+    }
+}
+
+function salvarOnline(online) {
+    appOnline = online;
+    const label = document.getElementById('status-label');
+    label.textContent = online ? 'Online — aceitando pedidos' : 'Offline — pausado';
+    aplicarOnline();
+    salvarDados();
+}
+
+// ── NAVEGAÇÃO ───────────────────────────────────
+function irPara(tela) {
+    if (!appOnline && tela !== 'admin' && tela !== 'admin-login') return;
+    const atual = document.querySelector('.screen.active').id;
+    document.getElementById(atual).classList.remove('active');
+    document.getElementById('screen-' + tela).classList.add('active');
+
+    if (tela === 'gourmet') {
+        document.querySelectorAll('input[name="ing"], input[name="tempero"], input[name="extra"]').forEach(el => el.checked = false);
+        document.getElementById('extra-box').style.display = 'none';
+        document.getElementById('extra-counter').style.display = 'none';
+        contarIng();
+        aplicarDisp();
+    } else if (tela === 'bebida') {
+        document.querySelectorAll('input[name="bev"]').forEach(el => el.checked = false);
+        Object.keys(bevQty).forEach(k => { bevQty[k]=1; document.getElementById('qty-'+k).textContent='1'; });
+    }
+}
+
+function voltarCardapio() {
+    const atual = document.querySelector('.screen.active').id;
+    document.getElementById(atual).classList.remove('active');
+    document.getElementById('screen-cardapio').classList.add('active');
+    atualizarCarrinho();
+}
+
+// ── INGREDIENTES ────────────────────────────────
+function contarIng() {
+    const total = document.querySelectorAll('input[name="ing"]:checked').length;
+    const counter = document.getElementById('ing-counter');
+    counter.textContent = `${total} / 6 ingredientes`;
+    counter.classList.toggle('over', total > 6);
+    document.querySelectorAll('input[name="ing"]').forEach(el => {
+        if (!el.checked) el.disabled = total >= 6;
+    });
+    const extraBox = document.getElementById('extra-box');
+    if (total >= 6) {
+        extraBox.style.display = 'block';
+    } else {
+        extraBox.style.display = 'none';
+        document.querySelectorAll('input[name="extra"]').forEach(el => el.checked = false);
+        document.getElementById('extra-counter').style.display = 'none';
+    }
+}
+
+function contarExtra() {
+    const total = document.querySelectorAll('input[name="extra"]:checked').length;
+    const el = document.getElementById('extra-counter');
+    if (total > 0) {
+        el.style.display = 'block';
+        el.textContent = `+${total} extra(s): R$ ${(total*3).toFixed(2)}`;
+    } else {
+        el.style.display = 'none';
+    }
+}
+
+// ── BEBIDAS ─────────────────────────────────────
+function qtyBev(id, delta) {
+    bevQty[id] = Math.max(1, bevQty[id] + delta);
+    document.getElementById('qty-'+id).textContent = bevQty[id];
+}
+
+// ── ADICIONAR AO CARRINHO ───────────────────────
+function addGourmet(e) {
+    e.preventDefault();
+    const ings    = Array.from(document.querySelectorAll('input[name="ing"]:checked')).map(x=>x.value);
+    const extras  = Array.from(document.querySelectorAll('input[name="extra"]:checked')).map(x=>x.value);
+    const temperos= Array.from(document.querySelectorAll('input[name="tempero"]:checked')).map(x=>x.value);
+    const preco   = 20 + extras.length * 3;
+
+    cart.push({
+        tipo: 'Pastel Gourmet',
+        preco,
+        ings: ings.join(', ') || 'sem ingredientes',
+        extras: extras.length > 0 ? extras.join(', ') : null,
+        temperos: temperos.length > 0 ? temperos.join(', ') : null,
+        extrasPreco: extras.length * 3
+    });
+    voltarCardapio();
+}
+
+function addBebida(e) {
+    e.preventDefault();
+    const sel = document.querySelector('input[name="bev"]:checked');
+    if (!sel) { alert('Escolha uma bebida!'); return; }
+    const [nome, preco] = sel.value.split('|');
+    const idMap = { 'Guaracamp':'guaracamp', 'Coca-Cola':'coca', 'Coca-Cola Zero':'coca-zero' };
+    const qty = bevQty[idMap[nome]] || 1;
+    for (let i=0; i<qty; i++) cart.push({ tipo: nome, preco: parseInt(preco) });
+    voltarCardapio();
+}
+
+// ── CARRINHO ────────────────────────────────────
+function atualizarCarrinho() {
+    const preview = document.getElementById('cart-preview');
+    const list    = document.getElementById('cart-list');
+    if (cart.length === 0) { preview.style.display = 'none'; return; }
+    preview.style.display = 'block';
+    let total = 0;
+    list.innerHTML = cart.map((item, i) => {
+        total += item.preco;
+        let detail = '';
+        if (item.ings) detail += `<div class="cart-item-detail">Ing: ${item.ings}</div>`;
+        if (item.temperos) detail += `<div class="cart-item-detail">Tempero: ${item.temperos}</div>`;
+        if (item.extras) detail += `<div class="cart-item-detail">⭐ Extra: ${item.extras} (+R$ ${item.extrasPreco.toFixed(2)})</div>`;
+        return `<div class="cart-item">
+            <div class="cart-item-title">${item.tipo}</div>
+            ${detail}
+            <div class="cart-item-price">R$ ${item.preco.toFixed(2)}</div>
+            <button type="button" class="btn-remove" onclick="remover(${i})">Remover</button>
+        </div>`;
+    }).join('');
+    document.getElementById('cart-total-val').textContent = `R$ ${total.toFixed(2)}`;
+}
+
+function remover(i) {
+    cart.splice(i, 1);
+    atualizarCarrinho();
+}
+
+// ── PAGAMENTO ───────────────────────────────────
+function onPag() {
+    const pag = document.querySelector('input[name="pag"]:checked').value;
+    document.getElementById('info-pix').style.display     = pag === 'PIX' ? 'block' : 'none';
+    document.getElementById('info-dinheiro').style.display = pag === 'Dinheiro' ? 'block' : 'none';
+    document.getElementById('info-cartao').style.display   = pag === 'Cartão' ? 'block' : 'none';
+}
+
+function onTroco() {
+    const sim = document.querySelector('input[name="troco"]:checked')?.value === 'sim';
+    document.getElementById('troco-campo').style.display = sim ? 'block' : 'none';
+}
+
+function calcTroco() {
+    const val   = parseFloat(document.getElementById('troco-val').value);
+    const total = cart.reduce((s,i) => s+i.preco, 0);
+    const res   = document.getElementById('troco-resultado');
+    if (!val) { res.style.display='none'; return; }
+    res.style.display = 'block';
+    if (val < total) {
+        res.style.color = '#c62828';
+        res.textContent = `⚠️ Valor insuficiente! Total: R$ ${total.toFixed(2)}`;
+    } else {
+        res.style.color = '#e65100';
+        res.textContent = `💰 Troco a devolver: R$ ${(val-total).toFixed(2)}`;
+    }
+}
+
+// ── WHATSAPP ────────────────────────────────────
+function enviarWhatsApp(e) {
+    e.preventDefault();
+    const nome = document.getElementById('nome').value;
+    const bloco = document.getElementById('bloco').value;
+    const apto  = document.getElementById('apto').value;
+    const obs   = document.getElementById('obs').value;
+    const pag   = document.querySelector('input[name="pag"]:checked').value;
+    const total = cart.reduce((s,i) => s+i.preco, 0);
+
+    let infoPag = '';
+    if (pag === 'PIX') {
+        infoPag = 'PIX\n⚠️ Aguardando comprovante PIX\nChave PIX: 21964983008';
+    } else if (pag === 'Dinheiro') {
+        const troco = document.querySelector('input[name="troco"]:checked')?.value;
+        const trocoVal = parseFloat(document.getElementById('troco-val')?.value || 0);
+        if (troco === 'sim' && trocoVal > 0) {
+            infoPag = `Dinheiro na Entrega\n💵 Troco para: R$ ${trocoVal.toFixed(2)}\n💰 Troco a devolver: R$ ${(trocoVal-total).toFixed(2)}`;
+        } else {
+            infoPag = 'Dinheiro na Entrega\nSem troco';
+        }
+    } else {
+        infoPag = 'Cartão (Máquina)\n⚠️ Levar máquina de cartão';
+    }
+
+    let msg = `*🧾 NOVO PEDIDO — PASTEL DA LÍVIA*\n\n`;
+    msg += `👤 *Cliente:* ${nome}\n`;
+    msg += `🏢 *Bloco:* ${bloco}  |  🏠 *Apto:* ${apto}\n`;
+    msg += `💰 *Total:* R$ ${total.toFixed(2)}\n`;
+    msg += `💳 *Pagamento:* ${infoPag}\n`;
+    if (obs) msg += `📝 *Obs:* ${obs}\n`;
+    msg += `\n━━━━━━━━━━━━━━━\n🛒 *ITENS DO PEDIDO:*\n`;
+
+    cart.forEach(item => {
+        msg += `\n*${item.tipo}* — R$ ${item.preco.toFixed(2)}\n`;
+        if (item.ings)     msg += `Ingredientes: ${item.ings}\n`;
+        if (item.temperos) msg += `Tempero: ${item.temperos}\n`;
+        if (item.extras)   msg += `⭐ Extras: ${item.extras} (+R$ ${item.extrasPreco.toFixed(2)})\n`;
+    });
+    msg += `━━━━━━━━━━━━━━━`;
+
+    window.open(`https://wa.me/5521964983008?text=${encodeURIComponent(msg)}`, '_blank');
+
+    // Resetar
+    setTimeout(() => {
+        cart = [];
+        document.getElementById('screen-dados').classList.remove('active');
+        document.getElementById('screen-cardapio').classList.add('active');
+        document.getElementById('cart-preview').style.display = 'none';
+        alert('Pedido enviado com sucesso! 🎉');
+    }, 500);
+}
+
+// ── ADMIN ────────────────────────────────────────
+let logoClicks = 0, logoTimer = null;
+function logoClick() {
+    logoClicks++;
+    clearTimeout(logoTimer);
+    logoTimer = setTimeout(() => logoClicks = 0, 1500);
+    if (logoClicks >= 3) {
+        logoClicks = 0;
+        irPara('admin-login');
+        document.getElementById('admin-senha').value = '';
+        document.getElementById('senha-erro').style.display = 'none';
+    }
+}
+
+function entrarAdmin() {
+    if (document.getElementById('admin-senha').value !== SENHA) {
+        document.getElementById('senha-erro').style.display = 'block';
+        return;
+    }
+    buildAdmin();
+    irPara('admin');
+}
+
+function buildAdmin() {
+    ['proteinas','queijos','complementos','bebidas'].forEach(grupo => {
+        const container = document.getElementById('admin-' + grupo);
+        const items = GRUPOS[grupo].items;
+        container.innerHTML = Object.entries(items).map(([id, nome]) => `
+            <div class="toggle-row">
+                <span class="toggle-name">${nome}</span>
                 <label class="toggle-switch">
-                    <input type="checkbox" id="toggle-online" checked onchange="toggleOnline(this.checked)">
+                    <input type="checkbox" ${disp[id] !== false ? 'checked' : ''} onchange="toggleItem('${id}', this.checked)">
                     <span class="toggle-slider"></span>
                 </label>
             </div>
-            <div id="admin-status" class="status-msg" style="display:none;"></div>
-            <div class="admin-section-title">Proteínas</div>
-            <div id="admin-proteinas"></div>
-            <div class="admin-section-title">Queijos</div>
-            <div id="admin-queijos"></div>
-            <div class="admin-section-title">Complementos</div>
-            <div id="admin-complementos"></div>
-            <div class="admin-section-title">Sabores do Pastelzinho Doce</div>
-            <div id="admin-sabores"></div>
-            <div class="admin-section-title">Bebidas</div>
-            <div id="admin-bebidas"></div>
-            <div class="admin-section-title">Combos</div>
-            <div id="admin-combos"></div>
-        </div>
-    </div>
-</div>
+        `).join('');
+    });
+    document.getElementById('toggle-online').checked = appOnline;
+    document.getElementById('status-label').textContent = appOnline ? 'Online — aceitando pedidos' : 'Offline — pausado';
+    document.getElementById('admin-status').style.display = 'none';
+}
 
-<script>
-    // ── CONFIG ──────────────────────────────────────────
-    const MASTER_KEY  = '$2a$10$3ZCCeWIHO9empTb2BsrRTuhzUusBilcV8A1lzwGW9VEwAtUDc8Wxy';
-    const ADMIN_SENHA = 'livia2025';
-    const BIN_ID      = '6a2a23dcda38895dfeaac841';
+function toggleItem(id, val) {
+    disp[id] = val;
+    aplicarDisp();
+    salvarDados();
+}
 
-    const INGREDIENTES = {
-        proteinas:    ['frango','carne','calabresa','carne-seca','linguica'],
-        queijos:      ['mussarela','catupiry','cheddar'],
-        complementos: ['bacon','presunto','milho','palmito','ervilha','tomate','cebola','cebola-roxa','azeitona','ovo'],
-        sabores:      [],
-        bebidas:      ['guaracamp','coca-cola','coca-cola-zero'],
-        combos:       []
-    };
-    const NOMES = {
-        frango:'Frango', carne:'Carne', calabresa:'Calabresa', 'carne-seca':'Carne Seca', linguica:'Linguiça Toscana',
-        mussarela:'Mussarela', catupiry:'Catupiry', cheddar:'Cheddar',
-        bacon:'Bacon', presunto:'Presunto', milho:'Milho', palmito:'Palmito', ervilha:'Ervilha',
-        tomate:'Tomate', cebola:'Cebola', 'cebola-roxa':'Cebola Roxa', azeitona:'Azeitona', ovo:'Ovo Cozido',
-        'romeu-julieta':'Romeu e Julieta', 'banana-canela':'Banana com Canela',
-        'banana-chocolate':'Banana com Chocolate', 'chocolate-confete':'Chocolate com Confete',
-        'doce-leite':'Doce de Leite',
-        'guaracamp':'Guaracamp', 'coca-cola':'Coca-Cola', 'coca-cola-zero':'Coca-Cola Zero',
+// ── AUTO-REFRESH ────────────────────────────────
+setInterval(carregarDados, 120000);
 
-        'trio-livia':'Trio da Lívia'
-    };
-    const TODOS = [...INGREDIENTES.proteinas, ...INGREDIENTES.queijos, ...INGREDIENTES.complementos,
-                   ...INGREDIENTES.sabores, ...INGREDIENTES.bebidas, ...INGREDIENTES.combos];
-
-    let disponibilidade = {};
-    TODOS.forEach(id => disponibilidade[id] = true); // todos disponíveis por padrão
-
-
-    // ── JSONBIN ─────────────────────────────────────────
-    async function carregarDisponibilidade() {
-        try {
-            const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-                headers: { 'X-Master-Key': MASTER_KEY }
-            });
-            const data = await res.json();
-            if (data.record) {
-                if (data.record.disponibilidade) disponibilidade = data.record.disponibilidade;
-                const online = data.record.online !== false;
-                aplicarStatusOnline(online);
-                const toggle = document.getElementById('toggle-online');
-                if (toggle) toggle.checked = online;
-            }
-        } catch(e) {
-            console.warn('Offline — usando dados locais');
-        }
-        applyDisponibilidade();
-    }
-
-    async function salvarDisponibilidade() {
-        const statusEl = document.getElementById('admin-status');
-        statusEl.style.display = 'block';
-        statusEl.className = 'status-msg saving';
-        statusEl.textContent = 'Salvando...';
-        try {
-            await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': MASTER_KEY
-                },
-                body: JSON.stringify({ disponibilidade })
-            });
-            statusEl.className = 'status-msg status-ok';
-            statusEl.textContent = 'Salvo! Clientes já veem as alterações.';
-            setTimeout(() => statusEl.style.display = 'none', 3000);
-        } catch(e) {
-            statusEl.className = 'status-msg status-erro';
-            statusEl.textContent = 'Erro ao salvar. Verifique a conexão.';
-        }
-    }
-
-    // ── DISPONIBILIDADE ─────────────────────────────────
-    function applyDisponibilidade() {
-        // Ingredientes do pastel
-        [...INGREDIENTES.proteinas, ...INGREDIENTES.queijos, ...INGREDIENTES.complementos].forEach(id => {
-            aplicarWrap(`wrap-${id}`, id, disponibilidade[id] !== false);
-            aplicarWrap(`wrap-trio-${id}`, `trio-${id}`, disponibilidade[id] !== false);
-        });
-
-        // Sabores do pastelzinho
-        const saborMap = {
-            'romeu-julieta': 'romeu', 'banana-canela': 'banana-canela',
-            'banana-chocolate': 'banana-choco', 'chocolate-confete': 'choco-confete',
-            'doce-leite': 'doce-leite'
-        };
-        INGREDIENTES.sabores.forEach(id => {
-            const inputId = saborMap[id];
-            aplicarWrap(`wrap-sabor-${id}`, inputId, disponibilidade[id] !== false);
-            aplicarWrap(`wrap-trio-sabor-${id}`, `trio-${inputId}`, disponibilidade[id] !== false);
-        });
-
-        // Bebidas
-        const bebidaMap = {
-            'guaracamp': 'guaracamp', 'coca-cola': 'coca', 'coca-cola-zero': 'coca-zero',
-            'guarana-antarctica': 'guarana', 'guarana-zero': 'guarana-zero'
-        };
-        INGREDIENTES.bebidas.forEach(id => {
-            const inputId = bebidaMap[id];
-            aplicarWrap(`wrap-beb-${id}`, inputId, disponibilidade[id] !== false);
-            aplicarWrap(`wrap-trio-beb-${id}`, `trio-${inputId}`, disponibilidade[id] !== false);
-        });
-
-        // Cards do cardápio
-        aplicarCard('card-doce', disponibilidade['romeu-julieta'] !== false ||
-            disponibilidade['banana-canela'] !== false || disponibilidade['banana-chocolate'] !== false ||
-            disponibilidade['chocolate-confete'] !== false || disponibilidade['doce-leite'] !== false);
-        aplicarCard('card-trio', disponibilidade['trio-livia'] !== false);
-
-        updateIngredientCount();
-        updateTrioCount();
-    }
-
-    function aplicarCard(cardId, disp) {
-        const card = document.getElementById(cardId);
-        if (!card) return;
-        if (!disp) {
-            card.style.opacity = '0.5';
-            card.style.pointerEvents = 'none';
-            if (!card.querySelector('.unavailable-tag')) {
-                const tag = document.createElement('div');
-                tag.className = 'unavailable-tag';
-                tag.style.marginTop = '5px';
-                tag.textContent = 'Indisponível no momento';
-                card.appendChild(tag);
-            }
-        } else {
-            card.style.opacity = '';
-            card.style.pointerEvents = '';
-            const tag = card.querySelector('.unavailable-tag');
-            if (tag) tag.remove();
-        }
-    }
-
-    function aplicarWrap(wrapId, inputId, disp) {
-        const wrap  = document.getElementById(wrapId);
-        const input = document.getElementById(inputId);
-        if (!wrap || !input) return;
-        if (!disp) {
-            wrap.classList.add('unavailable');
-            input.checked = false;
-            if (!wrap.querySelector('.unavailable-tag')) {
-                const tag = document.createElement('span');
-                tag.className = 'unavailable-tag';
-                tag.textContent = 'Indisponível no momento';
-                wrap.appendChild(tag);
-            }
-        } else {
-            wrap.classList.remove('unavailable');
-            const tag = wrap.querySelector('.unavailable-tag');
-            if (tag) tag.remove();
-        }
-    }
-
-    // ── ADMIN ────────────────────────────────────────────
-    let logoClicks = 0, logoTimer = null;
-    function logoClick() {
-        logoClicks++;
-        clearTimeout(logoTimer);
-        logoTimer = setTimeout(() => logoClicks = 0, 1500);
-        if (logoClicks >= 3) {
-            logoClicks = 0;
-            mudarTela(document.querySelector('.screen.active').id, 'screen-admin-login');
-            document.getElementById('admin-senha').value = '';
-            document.getElementById('senha-erro').style.display = 'none';
-        }
-    }
-
-    function entrarAdmin() {
-        if (document.getElementById('admin-senha').value !== ADMIN_SENHA) {
-            document.getElementById('senha-erro').style.display = 'block';
-            return;
-        }
-        mudarTela('screen-admin-login', 'screen-admin');
-        buildAdmin();
-    }
-
-    function buildAdmin() {
-        ['proteinas','queijos','complementos','sabores','bebidas','combos'].forEach(grupo => {
-            document.getElementById(`admin-${grupo}`).innerHTML = INGREDIENTES[grupo].map(id => `
-                <div class="admin-toggle-row">
-                    <span class="admin-toggle-name">${NOMES[id]}</span>
-                    <label class="toggle-switch">
-                        <input type="checkbox" ${disponibilidade[id] !== false ? 'checked' : ''} onchange="toggleItem('${id}', this.checked)">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-            `).join('');
-        });
-        document.getElementById('admin-status').style.display = 'none';
-    }
-
-    function toggleItem(id, disp) {
-        disponibilidade[id] = disp;
-        applyDisponibilidade();
-        salvarDisponibilidade();
-    }
-
-    // ── NAVEGAÇÃO ───────────────────────────────────────
-    let cart = [];
-    let bebidaQtys = { guaracamp:1, coca:1, 'coca-zero':1, guarana:1, 'guarana-zero':1 };
-
-    function mudarTela(hide, show) {
-        document.getElementById(hide).classList.remove('active');
-        document.getElementById(show).classList.add('active');
-    }
-
-    function voltarCardapio() {
-        mudarTela(document.querySelector('.screen.active').id, 'screen-cardapio');
-        atualizarPreviewCarrinho();
-    }
-
-    function escolherProduto(tipo) {
-        // Bloquear se offline
-        const toggle = document.getElementById('toggle-online');
-        if (toggle && !toggle.checked) return;
-
-        if (tipo==='gourmet') { document.getElementById('form-gourmet').reset(); updateIngredientCount(); applyDisponibilidade(); }
-        else if (tipo==='doce') { document.getElementById('form-doce').reset(); }
-        else if (tipo==='bebida') { document.getElementById('form-bebida').reset(); Object.keys(bebidaQtys).forEach(k => { bebidaQtys[k]=1; document.getElementById(`qty-${k}`).textContent='1'; }); }
-        else if (tipo==='trio') { document.getElementById('form-trio').reset(); updateTrioCount(); applyDisponibilidade(); }
-        mudarTela('screen-cardapio', `screen-${tipo}`);
-    }
-
-    function finalizarCompra() { mudarTela('screen-cardapio','screen-dados'); }
-
-    function updateIngredientCount() {
-        const total = document.querySelectorAll('input[name="ingrediente"]:checked').length;
-        const counter = document.getElementById('ingredientCounter');
-        const extra = Math.max(0, total - 6);
-        if (extra > 0) {
-            counter.textContent = `${total} ingredientes — +${extra} extra(s): R$ ${(extra * 3).toFixed(2)}`;
-            counter.classList.add('limit');
-        } else {
-            counter.textContent = `${total} / 6 ingredientes`;
-            counter.classList.remove('limit');
-        }
-        // Não bloquear mais - pode adicionar quantos quiser pagando extra
-        // Mas desabilitar após 9 (limite razoável)
-        document.querySelectorAll('input[name="ingrediente"]').forEach(el => { if (!el.checked) el.disabled = total >= 9; });
-    }
-
-    function updateTrioCount() {
-        const total = document.querySelectorAll('input[name="trio-ing"]:checked').length;
-        const counter = document.getElementById('trioCounter');
-        counter.textContent = `${total} / 6 ingredientes`;
-        counter.classList.toggle('limit', total > 6);
-        document.querySelectorAll('input[name="trio-ing"]').forEach(el => { if (!el.checked) el.disabled = total >= 6; });
-    }
-
-    function changeQtyBebida(b, c) {
-        bebidaQtys[b] = Math.max(1, bebidaQtys[b] + c);
-        document.getElementById(`qty-${b}`).textContent = bebidaQtys[b];
-    }
-
-    function salvarGourmet(e) {
-        e.preventDefault();
-        const total = document.querySelectorAll('input[name="ingrediente"]:checked').length;
-        const extra = Math.max(0, total - 6);
-        const preco = 20 + (extra * 3);
-        const ings     = Array.from(document.querySelectorAll('input[name="ingrediente"]:checked')).map(x=>x.value).join(', ');
-        const temperos = Array.from(document.querySelectorAll('input[name="tempero"]:checked')).map(x=>x.value).join(', ');
-        let detalhes = `${ings||'sem ingredientes'} | Tempero: ${temperos||'nenhum'}`;
-        if (extra > 0) detalhes += ` | +${extra} ingrediente(s) extra`;
-        cart.push({ tipo:'Pastel Gourmet', preco, detalhes });
-        atualizarPreviewCarrinho();
-    }
-
-    function salvarDoce(e) {
-        e.preventDefault();
-        cart.push({ tipo:'Pastelzinho Doce', preco:10, detalhes: document.querySelector('input[name="sabor"]:checked').value });
-        atualizarPreviewCarrinho();
-    }
-
-    function salvarBebida(e) {
-        e.preventDefault();
-        const sel = document.querySelector('input[name="bebida"]:checked');
-        if (!sel) { alert('Escolha uma bebida!'); return; }
-        const [nome, preco] = sel.value.split('|');
-        const idMap = { 'Guaracamp':'guaracamp','Coca-Cola':'coca','Coca-Cola Zero':'coca-zero','Guaraná Antarctica':'guarana','Guaraná Antarctica Zero':'guarana-zero' };
-        const qty = bebidaQtys[idMap[nome]] || 1;
-        for (let i=0; i<qty; i++) cart.push({ tipo:nome, preco:parseInt(preco), detalhes:null });
-        atualizarPreviewCarrinho();
-    }
-
-    function salvarTrio(e) {
-        e.preventDefault();
-        const total = document.querySelectorAll('input[name="trio-ing"]:checked').length;
-        if (total > 6) { alert('Máximo 6 ingredientes!'); return; }
-        const ings     = Array.from(document.querySelectorAll('input[name="trio-ing"]:checked')).map(x=>x.value).join(', ');
-        const temperos = Array.from(document.querySelectorAll('input[name="trio-tempero"]:checked')).map(x=>x.value).join(', ');
-        const sabor    = document.querySelector('input[name="trio-sabor"]:checked').value;
-        const bebida   = document.querySelector('input[name="trio-bebida"]:checked').value;
-        cart.push({ tipo:'Trio da Lívia', preco:30, detalhes:`Pastel: ${ings||'sem ingredientes'} | Tempero: ${temperos||'nenhum'} | Pastelzinho: ${sabor} | Refrigerante: ${bebida}` });
-        atualizarPreviewCarrinho();
-    }
-
-    function atualizarPreviewCarrinho() {
-        const preview  = document.getElementById('cart-preview');
-        const cartList = document.getElementById('cart-list');
-        if (cart.length === 0) { preview.style.display='none'; mudarTela(document.querySelector('.screen.active').id,'screen-cardapio'); return; }
-        preview.style.display = 'block';
-        let total = 0;
-        cartList.innerHTML = cart.map((item,i) => {
-            total += item.preco;
-            return `<div class="cart-item">
-                <div class="cart-item-title">${item.tipo}</div>
-                ${item.detalhes ? `<div class="cart-item-details">${item.detalhes}</div>` : ''}
-                <div class="cart-item-price">R$ ${item.preco.toFixed(2)}</div>
-                <button type="button" class="btn-remove" onclick="removerItem(${i})">Remover</button>
-            </div>`;
-        }).join('');
-        document.getElementById('cart-total-price').textContent = `R$ ${total.toFixed(2)}`;
-        mudarTela(document.querySelector('.screen.active').id, 'screen-cardapio');
-    }
-
-    function removerItem(i) { cart.splice(i,1); atualizarPreviewCarrinho(); }
-
-    function onPagamentoChange() {
-        const pagamento = document.querySelector('input[name="pagamento"]:checked').value;
-        document.getElementById('pix-info').style.display     = pagamento === 'PIX' ? 'block' : 'none';
-        document.getElementById('dinheiro-info').style.display = pagamento === 'Dinheiro na Entrega' ? 'block' : 'none';
-        document.getElementById('cartao-info').style.display   = pagamento === 'Cartão (Máquina)' ? 'block' : 'none';
-    }
-
-    function onTrocoChange() {
-        const troco = document.querySelector('input[name="troco"]:checked')?.value;
-        document.getElementById('troco-valor-box').style.display = troco === 'sim' ? 'block' : 'none';
-    }
-
-    function enviarWhatsApp(e) {
-        e.preventDefault();
-        const nome      = document.getElementById('nome').value;
-        const bloco     = document.getElementById('bloco').value;
-        const apto      = document.getElementById('apto').value;
-        const obs       = document.getElementById('observacoes').value;
-        const pagamento = document.querySelector('input[name="pagamento"]:checked').value;
-
-        // Montar info de pagamento
-        let infoPagamento = '';
-        if (pagamento === 'PIX') {
-            infoPagamento = 'PIX\n⚠️ Aguardando comprovante PIX\nChave PIX: 21964983008';
-        } else if (pagamento === 'Dinheiro na Entrega') {
-            const troco = document.querySelector('input[name="troco"]:checked')?.value;
-            if (troco === 'sim') {
-                const trocoValor = document.getElementById('troco-valor').value;
-                const totalPedido = cart.reduce((s, i) => s + i.preco, 0);
-                const troco_calc = parseFloat(trocoValor) - totalPedido;
-                infoPagamento = `Dinheiro na Entrega\n💵 Troco para: R$ ${parseFloat(trocoValor).toFixed(2)}\n💰 Troco a devolver: R$ ${troco_calc.toFixed(2)}`;
-            } else {
-                infoPagamento = 'Dinheiro na Entrega\nSem troco';
-            }
-        } else if (pagamento === 'Cartão (Máquina)') {
-            infoPagamento = 'Cartão (Máquina)\n⚠️ Levar máquina de cartão';
-        }
-
-        // Calcular total
-        let total = 0;
-        cart.forEach(item => total += item.preco);
-
-        // Montar itens organizados
-        let itensMsg = '';
-        cart.forEach(item => {
-            if (item.tipo === 'Trio da Lívia') {
-                // Separar detalhes do trio
-                const partes = item.detalhes.split(' | ');
-                let pastelIng = '', tempero = '', pastelzinho = '', refri = '';
-                partes.forEach(p => {
-                    if (p.startsWith('Pastel: ')) pastelIng = p.replace('Pastel: ', '');
-                    else if (p.startsWith('Tempero: ')) tempero = p.replace('Tempero: ', '');
-                    else if (p.startsWith('Pastelzinho: ')) pastelzinho = p.replace('Pastelzinho: ', '');
-                    else if (p.startsWith('Refrigerante: ')) refri = p.replace('Refrigerante: ', '');
-                });
-                itensMsg += `\n*Trio da Lívia* — R$ ${item.preco.toFixed(2)}`;
-                itensMsg += `\nPastel: ${pastelIng}`;
-                if (tempero && tempero !== 'nenhum') itensMsg += `\nTempero: ${tempero}`;
-                itensMsg += `\nPastelzinho Doce: ${pastelzinho}`;
-                itensMsg += `\nRefrigerante: ${refri}\n`;
-            } else if (item.tipo === 'Pastel Gourmet') {
-                const partes = item.detalhes.split(' | ');
-                let ings = '', tempero = '';
-                partes.forEach(p => {
-                    if (p.startsWith('Tempero: ')) tempero = p.replace('Tempero: ', '');
-                    else ings = p;
-                });
-                itensMsg += `\n*Pastel Gourmet* — R$ ${item.preco.toFixed(2)}`;
-                itensMsg += `\nIngredientes: ${ings}`;
-                if (tempero && tempero !== 'nenhum') itensMsg += `\nTempero: ${tempero}`;
-                itensMsg += '\n';
-            } else if (item.tipo === 'Pastelzinho Doce') {
-                itensMsg += `\n*Pastelzinho Doce* — R$ ${item.preco.toFixed(2)}`;
-                itensMsg += `\nSabor: ${item.detalhes}\n`;
-            } else {
-                itensMsg += `\n*${item.tipo}* — R$ ${item.preco.toFixed(2)}\n`;
-            }
-        });
-
-        // Montar mensagem final
-        let msg = `*🧾 NOVO PEDIDO — PASTEL DA LÍVIA*`;
-        msg += `\n\n👤 *Cliente:* ${nome}`;
-        msg += `\n🏢 *Bloco:* ${bloco}  |  🏠 *Apto:* ${apto}`;
-        msg += `\n💰 *Total:* R$ ${total.toFixed(2)}`;
-        msg += `\n💳 *Pagamento:* ${infoPagamento}`;
-        if (obs) msg += `\n📝 *Obs:* ${obs}`;
-        msg += `\n\n━━━━━━━━━━━━━━━`;
-        msg += `\n🛒 *ITENS DO PEDIDO:*`;
-        msg += itensMsg;
-        msg += `━━━━━━━━━━━━━━━`;
-
-        window.open(`https://wa.me/5521964983008?text=${encodeURIComponent(msg)}`, '_blank');
-
-        // Voltar pra tela inicial após enviar
-        setTimeout(() => {
-            cart = [];
-            document.getElementById('form-dados').reset();
-            document.getElementById('cart-preview').style.display = 'none';
-            mudarTela('screen-dados', 'screen-cardapio');
-            alert('Pedido enviado! Obrigado pelo seu pedido 🎉');
-        }, 500);
-    }
-
-    // ── TROCO ────────────────────────────────────────────
-    function calcularTroco() {
-        const valor = parseFloat(document.getElementById('troco-valor').value);
-        const total = cart.reduce((s, i) => s + i.preco, 0);
-        const resultado = document.getElementById('troco-resultado');
-        if (!valor || valor <= 0) { resultado.style.display = 'none'; return; }
-        if (valor < total) {
-            resultado.style.display = 'block';
-            resultado.style.background = '#ffebee';
-            resultado.style.borderColor = '#ffcdd2';
-            resultado.style.color = '#c62828';
-            resultado.innerHTML = `⚠️ Valor insuficiente! Total do pedido: R$ ${total.toFixed(2)}`;
-        } else {
-            const troco = valor - total;
-            resultado.style.display = 'block';
-            resultado.style.background = '#fff3e0';
-            resultado.style.borderColor = '#ffe0b2';
-            resultado.style.color = '#e65100';
-            resultado.innerHTML = `💰 Troco a devolver: <strong>R$ ${troco.toFixed(2)}</strong>`;
-        }
-    }
-
-    // ── ONLINE/OFFLINE ───────────────────────────────────
-    async function toggleOnline(online) {
-        const label = document.getElementById('status-label');
-        label.textContent = online ? 'Online — aceitando pedidos' : 'Offline — pausado';
-        try {
-            await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'X-Master-Key': MASTER_KEY },
-                body: JSON.stringify({ disponibilidade, online })
-            });
-        } catch(e) { console.warn('Erro ao salvar status online'); }
-        aplicarStatusOnline(online);
-    }
-
-    function aplicarStatusOnline(online) {
-        const aviso = document.getElementById('aviso-offline');
-        const cards = document.querySelectorAll('.product-card');
-        const btnFinalizar = document.getElementById('btn-finalizar');
-        if (!online) {
-            aviso.style.display = 'block';
-            // Bloqueia TODOS os cards do cardápio
-            cards.forEach(c => { c.style.opacity='0.4'; c.style.pointerEvents='none'; });
-            // Se estiver em qualquer tela de produto, volta pro cardápio
-            const telaAtual = document.querySelector('.screen.active').id;
-            if (telaAtual !== 'screen-cardapio' && telaAtual !== 'screen-admin' && telaAtual !== 'screen-admin-login') {
-                mudarTela(telaAtual, 'screen-cardapio');
-            }
-            // Esconde carrinho e botão finalizar
-            document.getElementById('cart-preview').style.display = 'none';
-        } else {
-            aviso.style.display = 'none';
-            cards.forEach(c => { c.style.opacity=''; c.style.pointerEvents=''; });
-            applyDisponibilidade();
-        }
-    }
-
-    // ── AUTO-REFRESH DISPONIBILIDADE (a cada 2 min) ──────
-    setInterval(async () => {
-        try {
-            const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-                headers: { 'X-Master-Key': MASTER_KEY }
-            });
-            const data = await res.json();
-            if (data.record) {
-                if (data.record.disponibilidade) disponibilidade = data.record.disponibilidade;
-                applyDisponibilidade();
-                // Verificar status online
-                const online = data.record.online !== false;
-                aplicarStatusOnline(online);
-                const toggle = document.getElementById('toggle-online');
-                if (toggle) toggle.checked = online;
-            }
-        } catch(e) {}
-    }, 120000); // 2 minutos
-
-    // ── INIT ────────────────────────────────────────────
-    carregarDisponibilidade();
+// ── INIT ────────────────────────────────────────
+carregarDados();
 </script>
 </body>
 </html>
