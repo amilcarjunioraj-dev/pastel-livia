@@ -92,7 +92,7 @@
             <div class="product-card" onclick="escolherProduto('gourmet')">
                 <div class="product-card-title">Pastel Gourmet</div>
                 <div class="product-card-price">R$ 20,00</div>
-                <div class="product-card-desc">Monte com até 6 ingredientes + tempero</div>
+                <div class="product-card-desc">Monte com até 6 ingredientes + tempero. Ingrediente extra: R$ 3,00</div>
             </div>
             <div class="product-card" id="card-doce" onclick="escolherProduto('doce')">
                 <div class="product-card-title">Pastelzinho Doce</div>
@@ -130,6 +130,7 @@
                         <div class="checkbox-item" id="wrap-frango"><input type="checkbox" id="frango" name="ingrediente" value="Frango" onchange="updateIngredientCount()"><label for="frango">Frango</label></div>
                         <div class="checkbox-item" id="wrap-carne"><input type="checkbox" id="carne" name="ingrediente" value="Carne" onchange="updateIngredientCount()"><label for="carne">Carne</label></div>
                         <div class="checkbox-item" id="wrap-calabresa"><input type="checkbox" id="calabresa" name="ingrediente" value="Calabresa" onchange="updateIngredientCount()"><label for="calabresa">Calabresa</label></div>
+                        <div class="checkbox-item" id="wrap-carne-seca"><input type="checkbox" id="carne-seca" name="ingrediente" value="Carne Seca" onchange="updateIngredientCount()"><label for="carne-seca">Carne Seca</label></div>
                         <div class="checkbox-item" id="wrap-linguica"><input type="checkbox" id="linguica" name="ingrediente" value="Linguiça Toscana" onchange="updateIngredientCount()"><label for="linguica">Linguiça Toscana</label></div>
                     </div>
                 </div>
@@ -139,7 +140,7 @@
                         <div class="checkbox-item" id="wrap-mussarela"><input type="checkbox" id="mussarela" name="ingrediente" value="Mussarela" onchange="updateIngredientCount()"><label for="mussarela">Mussarela</label></div>
                         <div class="checkbox-item" id="wrap-catupiry"><input type="checkbox" id="catupiry" name="ingrediente" value="Catupiry" onchange="updateIngredientCount()"><label for="catupiry">Catupiry</label></div>
                         <div class="checkbox-item" id="wrap-cheddar"><input type="checkbox" id="cheddar" name="ingrediente" value="Cheddar" onchange="updateIngredientCount()"><label for="cheddar">Cheddar</label></div>
-                        <div class="checkbox-item" id="wrap-cream"><input type="checkbox" id="cream" name="ingrediente" value="Cream Cheese" onchange="updateIngredientCount()"><label for="cream">Cream Cheese</label></div>
+
                     </div>
                 </div>
                 <div class="form-group">
@@ -149,6 +150,7 @@
                         <div class="checkbox-item" id="wrap-presunto"><input type="checkbox" id="presunto" name="ingrediente" value="Presunto" onchange="updateIngredientCount()"><label for="presunto">Presunto</label></div>
                         <div class="checkbox-item" id="wrap-milho"><input type="checkbox" id="milho" name="ingrediente" value="Milho" onchange="updateIngredientCount()"><label for="milho">Milho</label></div>
                         <div class="checkbox-item" id="wrap-palmito"><input type="checkbox" id="palmito" name="ingrediente" value="Palmito" onchange="updateIngredientCount()"><label for="palmito">Palmito</label></div>
+                        <div class="checkbox-item" id="wrap-ervilha"><input type="checkbox" id="ervilha" name="ingrediente" value="Ervilha" onchange="updateIngredientCount()"><label for="ervilha">Ervilha</label></div>
                         <div class="checkbox-item" id="wrap-tomate"><input type="checkbox" id="tomate" name="ingrediente" value="Tomate" onchange="updateIngredientCount()"><label for="tomate">Tomate</label></div>
                         <div class="checkbox-item" id="wrap-cebola"><input type="checkbox" id="cebola" name="ingrediente" value="Cebola" onchange="updateIngredientCount()"><label for="cebola">Cebola</label></div>
                         <div class="checkbox-item" id="wrap-cebola-roxa"><input type="checkbox" id="cebola-roxa" name="ingrediente" value="Cebola Roxa" onchange="updateIngredientCount()"><label for="cebola-roxa">Cebola Roxa</label></div>
@@ -203,8 +205,7 @@
                     <div class="beverage-row" id="wrap-beb-guaracamp"><input type="radio" id="guaracamp" name="bebida" value="Guaracamp|4"><label for="guaracamp" style="margin:0;">Guaracamp – R$ 4</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('guaracamp',-1)">−</button><div class="qty-display" id="qty-guaracamp">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('guaracamp',1)">+</button></div></div>
                     <div class="beverage-row" id="wrap-beb-coca-cola"><input type="radio" id="coca" name="bebida" value="Coca-Cola|6"><label for="coca" style="margin:0;">Coca-Cola – R$ 6</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('coca',-1)">−</button><div class="qty-display" id="qty-coca">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('coca',1)">+</button></div></div>
                     <div class="beverage-row" id="wrap-beb-coca-cola-zero"><input type="radio" id="coca-zero" name="bebida" value="Coca-Cola Zero|6"><label for="coca-zero" style="margin:0;">Coca-Cola Zero – R$ 6</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('coca-zero',-1)">−</button><div class="qty-display" id="qty-coca-zero">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('coca-zero',1)">+</button></div></div>
-                    <div class="beverage-row" id="wrap-beb-guarana-antarctica"><input type="radio" id="guarana" name="bebida" value="Guaraná Antarctica|6"><label for="guarana" style="margin:0;">Guaraná Antarctica – R$ 6</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('guarana',-1)">−</button><div class="qty-display" id="qty-guarana">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('guarana',1)">+</button></div></div>
-                    <div class="beverage-row" id="wrap-beb-guarana-zero"><input type="radio" id="guarana-zero" name="bebida" value="Guaraná Antarctica Zero|6"><label for="guarana-zero" style="margin:0;">Guaraná Antarctica Zero – R$ 6</label><div class="quantity-selector"><button type="button" class="qty-btn" onclick="changeQtyBebida('guarana-zero',-1)">−</button><div class="qty-display" id="qty-guarana-zero">1</div><button type="button" class="qty-btn" onclick="changeQtyBebida('guarana-zero',1)">+</button></div></div>
+
                 </div>
             </div>
             <button type="submit" class="btn-submit">Adicionar ao carrinho</button>
@@ -381,23 +382,23 @@
     const BIN_ID      = '6a2a23dcda38895dfeaac841';
 
     const INGREDIENTES = {
-        proteinas:    ['frango','carne','calabresa','linguica'],
-        queijos:      ['mussarela','catupiry','cheddar','cream'],
-        complementos: ['bacon','presunto','milho','palmito','tomate','cebola','cebola-roxa','azeitona','ovo'],
-        sabores:      ['romeu-julieta','banana-canela','banana-chocolate','chocolate-confete','doce-leite'],
-        bebidas:      ['guaracamp','coca-cola','coca-cola-zero','guarana-antarctica','guarana-zero'],
-        combos:       ['trio-livia']
+        proteinas:    ['frango','carne','calabresa','carne-seca','linguica'],
+        queijos:      ['mussarela','catupiry','cheddar'],
+        complementos: ['bacon','presunto','milho','palmito','ervilha','tomate','cebola','cebola-roxa','azeitona','ovo'],
+        sabores:      [],
+        bebidas:      ['guaracamp','coca-cola','coca-cola-zero'],
+        combos:       []
     };
     const NOMES = {
-        frango:'Frango', carne:'Carne', calabresa:'Calabresa', linguica:'Linguiça Toscana',
-        mussarela:'Mussarela', catupiry:'Catupiry', cheddar:'Cheddar', cream:'Cream Cheese',
-        bacon:'Bacon', presunto:'Presunto', milho:'Milho', palmito:'Palmito',
+        frango:'Frango', carne:'Carne', calabresa:'Calabresa', 'carne-seca':'Carne Seca', linguica:'Linguiça Toscana',
+        mussarela:'Mussarela', catupiry:'Catupiry', cheddar:'Cheddar',
+        bacon:'Bacon', presunto:'Presunto', milho:'Milho', palmito:'Palmito', ervilha:'Ervilha',
         tomate:'Tomate', cebola:'Cebola', 'cebola-roxa':'Cebola Roxa', azeitona:'Azeitona', ovo:'Ovo Cozido',
         'romeu-julieta':'Romeu e Julieta', 'banana-canela':'Banana com Canela',
         'banana-chocolate':'Banana com Chocolate', 'chocolate-confete':'Chocolate com Confete',
         'doce-leite':'Doce de Leite',
         'guaracamp':'Guaracamp', 'coca-cola':'Coca-Cola', 'coca-cola-zero':'Coca-Cola Zero',
-        'guarana-antarctica':'Guaraná Antarctica', 'guarana-zero':'Guaraná Antarctica Zero',
+
         'trio-livia':'Trio da Lívia'
     };
     const TODOS = [...INGREDIENTES.proteinas, ...INGREDIENTES.queijos, ...INGREDIENTES.complementos,
@@ -607,9 +608,17 @@
     function updateIngredientCount() {
         const total = document.querySelectorAll('input[name="ingrediente"]:checked').length;
         const counter = document.getElementById('ingredientCounter');
-        counter.textContent = `${total} / 6 ingredientes`;
-        counter.classList.toggle('limit', total > 6);
-        document.querySelectorAll('input[name="ingrediente"]').forEach(el => { if (!el.checked) el.disabled = total >= 6; });
+        const extra = Math.max(0, total - 6);
+        if (extra > 0) {
+            counter.textContent = `${total} ingredientes — +${extra} extra(s): R$ ${(extra * 3).toFixed(2)}`;
+            counter.classList.add('limit');
+        } else {
+            counter.textContent = `${total} / 6 ingredientes`;
+            counter.classList.remove('limit');
+        }
+        // Não bloquear mais - pode adicionar quantos quiser pagando extra
+        // Mas desabilitar após 9 (limite razoável)
+        document.querySelectorAll('input[name="ingrediente"]').forEach(el => { if (!el.checked) el.disabled = total >= 9; });
     }
 
     function updateTrioCount() {
@@ -628,10 +637,13 @@
     function salvarGourmet(e) {
         e.preventDefault();
         const total = document.querySelectorAll('input[name="ingrediente"]:checked').length;
-        if (total > 6) { alert('Máximo 6 ingredientes!'); return; }
+        const extra = Math.max(0, total - 6);
+        const preco = 20 + (extra * 3);
         const ings     = Array.from(document.querySelectorAll('input[name="ingrediente"]:checked')).map(x=>x.value).join(', ');
         const temperos = Array.from(document.querySelectorAll('input[name="tempero"]:checked')).map(x=>x.value).join(', ');
-        cart.push({ tipo:'Pastel Gourmet', preco:20, detalhes:`${ings||'sem ingredientes'} | Tempero: ${temperos||'nenhum'}` });
+        let detalhes = `${ings||'sem ingredientes'} | Tempero: ${temperos||'nenhum'}`;
+        if (extra > 0) detalhes += ` | +${extra} ingrediente(s) extra`;
+        cart.push({ tipo:'Pastel Gourmet', preco, detalhes });
         atualizarPreviewCarrinho();
     }
 
