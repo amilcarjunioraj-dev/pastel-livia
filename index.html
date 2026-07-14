@@ -138,7 +138,7 @@
         </div>
     </div>
 
-    <!-- CARDÁPIO QUENTINHAS -->
+    <!-- CARDÁPIO REFEIÇÕES -->
     <div class="screen" id="screen-cardapio-refeicoes">
         <div class="page-back" onclick="voltarInicio()">&#8592; Voltar</div>
         <div id="aviso-offline-refeicoes" style="display:none; margin-bottom:15px;" class="info-box info-red">
@@ -233,7 +233,7 @@
         </form>
     </div>
 
-    <!-- QUENTINHA - PRATO -->
+    <!-- REFEIÇÃO - PRATO -->
     <div class="screen" id="screen-prato">
         <div class="page-back" onclick="voltarCardapio()">&#8592; Voltar ao cardápio</div>
         <form onsubmit="addPrato(event)">
@@ -283,7 +283,7 @@
         </form>
     </div>
 
-    <!-- BEBIDA QUENTINHAS -->
+    <!-- BEBIDA REFEIÇÕES -->
     <div class="screen" id="screen-bebida-refeicao">
         <div class="page-back" onclick="voltarCardapio()">&#8592; Voltar ao cardápio</div>
         <form onsubmit="addBebida(event, 'refeicoes')">
@@ -775,7 +775,7 @@ function enviarWhatsApp(e) {
     const obs   = document.getElementById('obs').value;
     const pag   = document.querySelector('input[name="pag"]:checked').value;
     const total = cart.reduce((s, i) => s + i.preco, 0);
-    const tipo  = modoAtual === 'pasteis' ? 'PASTÉIS' : 'QUENTINHAS';
+    const tipo  = modoAtual === 'pasteis' ? 'PASTÉIS' : 'REFEIÇÕES';
 
     let infoPag = '';
     if (pag === 'PIX') infoPag = 'PIX\n⚠️ Aguardando comprovante PIX\nChave PIX: 21964983008';
