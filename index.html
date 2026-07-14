@@ -490,6 +490,8 @@ async function carregarDados() {
             if (data.record.pratos)  pratosAtivos = { ...pratosAtivos, ...data.record.pratos };
             if (data.record.precos)  precos  = { ...precos, ...data.record.precos };
             if (typeof data.record.onlinePasteis   === 'boolean') onlinePasteis   = data.record.onlinePasteis;
+            if (typeof data.record.onlineQuentinhas === 'boolean') onlineRefeições = data.record.onlineQuentinhas;
+            if (typeof data.record['onlineRefeições'] === 'boolean') onlineRefeições = data.record['onlineRefeições'];
             if (typeof data.record.onlineRefeições === 'boolean') onlineRefeições = data.record.onlineRefeições;
         }
     } catch(e) {}
@@ -503,7 +505,7 @@ async function salvarDados() {
         await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-Master-Key': MASTER_KEY },
-            body: JSON.stringify({ disp, pratos: pratosAtivos, precos, onlinePasteis, onlineRefeições })
+            body: JSON.stringify({ disp, pratos: pratosAtivos, precos, onlinePasteis, 'onlineRefeições': onlineRefeições })
         });
         el.textContent = 'Salvo!';
         setTimeout(() => el.style.display = 'none', 2000);
@@ -892,7 +894,7 @@ function buildAdmin() {
 
 function salvarOnline(tipo, val) {
     if (tipo === 'pasteis') onlinePasteis = val;
-    else onlineRefeições = val;
+    else { onlineRefeições = val; }
     aplicarOnline();
     salvarDados();
 }
