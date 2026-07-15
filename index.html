@@ -789,6 +789,7 @@ function enviarWhatsApp(e) {
     });
     msg += `━━━━━━━━━━━━━━━`;
 
+    tocarAlertaPedido();
     window.open(`https://wa.me/5521964983008?text=${encodeURIComponent(msg)}`, '_blank');
 
     setTimeout(() => {
