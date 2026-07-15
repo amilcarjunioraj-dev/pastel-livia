@@ -587,6 +587,17 @@ function renderizarPratos() {
 }
 
 // ── NAVEGAÇÃO ───────────────────────────────────
+function finalizarCompra() {
+    document.getElementById('pag-pix').checked = true;
+    document.getElementById('info-pix').style.display = 'block';
+    document.getElementById('info-dinheiro').style.display = 'none';
+    document.getElementById('info-cartao').style.display = 'none';
+    document.getElementById('troco-campo').style.display = 'none';
+    const tr = document.getElementById('troco-resultado');
+    if (tr) tr.style.display = 'none';
+    irPara('dados');
+}
+
 function irCardapio(modo) {
     modoAtual = modo;
     const atual = document.querySelector('.screen.active').id;
