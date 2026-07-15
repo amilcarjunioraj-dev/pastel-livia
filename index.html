@@ -238,21 +238,15 @@
         <div class="page-back" onclick="voltarCardapio()">&#8592; Voltar ao cardápio</div>
         <form onsubmit="addPrato(event)">
             <div class="section-title" id="prato-titulo">Prato</div>
-            <div style="background:#f9f9f9; border:1px solid #eee; border-radius:4px; padding:12px; margin-bottom:15px; font-size:13px; color:#666;">
-                Acompanha: <strong>Arroz e Feijão</strong>
-            </div>
             <div class="form-group">
-                <label>Farofa</label>
+                <label>Acompanhamentos (escolha quantos quiser)</label>
                 <div class="check-list">
-                    <div class="check-item" id="wrap-acomp-farofa-sim"><input type="radio" id="acomp-farofa-sim" name="farofa" value="Com Farofa" required><label for="acomp-farofa-sim">Com Farofa</label></div>
-                    <div class="check-item" id="wrap-acomp-farofa-nao"><input type="radio" id="acomp-farofa-nao" name="farofa" value="Sem Farofa"><label for="acomp-farofa-nao">Sem Farofa</label></div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Escolha um acompanhamento</label>
-                <div class="check-list">
-                    <div class="check-item" id="wrap-acomp-batata"><input type="radio" id="acomp-batata" name="acomp" value="Batata Frita" required><label for="acomp-batata">Batata Frita</label></div>
-                    <div class="check-item" id="wrap-acomp-salada"><input type="radio" id="acomp-salada" name="acomp" value="Salada Crua (Cenoura e Beterraba Ralada)"><label for="acomp-salada">Salada Crua (Cenoura e Beterraba Ralada)</label></div>
+                    <div class="check-item" id="wrap-acomp-arroz"><input type="checkbox" id="acomp-arroz" name="acomp" value="Arroz"><label for="acomp-arroz">Arroz</label></div>
+                    <div class="check-item" id="wrap-acomp-feijao"><input type="checkbox" id="acomp-feijao" name="acomp" value="Feijão"><label for="acomp-feijao">Feijão</label></div>
+                    <div class="check-item" id="wrap-acomp-farofa"><input type="checkbox" id="acomp-farofa" name="acomp" value="Farofa"><label for="acomp-farofa">Farofa</label></div>
+                    <div class="check-item" id="wrap-acomp-macarrao"><input type="checkbox" id="acomp-macarrao" name="acomp" value="Macarrão"><label for="acomp-macarrao">Macarrão</label></div>
+                    <div class="check-item" id="wrap-acomp-batata"><input type="checkbox" id="acomp-batata" name="acomp" value="Batata Frita"><label for="acomp-batata">Batata Frita</label></div>
+                    <div class="check-item" id="wrap-acomp-salada"><input type="checkbox" id="acomp-salada" name="acomp" value="Salada Crua (Cenoura e Beterraba Ralada)"><label for="acomp-salada">Salada Crua (Cenoura e Beterraba Ralada)</label></div>
                 </div>
             </div>
             <div class="form-group" style="margin-top:15px;">
@@ -405,18 +399,12 @@
         <!-- ACOMPANHAMENTOS -->
         <div class="admin-section-box">
             <div class="admin-section-box-title">Disponibilidade — Acompanhamentos</div>
-            <div class="toggle-row">
-                <span class="toggle-name">Farofa</span>
-                <label class="toggle-switch"><input type="checkbox" id="toggle-farofa" checked onchange="toggleAcomp('farofa', this.checked)"><span class="toggle-slider"></span></label>
-            </div>
-            <div class="toggle-row">
-                <span class="toggle-name">Batata Frita</span>
-                <label class="toggle-switch"><input type="checkbox" id="toggle-batata" checked onchange="toggleAcomp('batata-frita', this.checked)"><span class="toggle-slider"></span></label>
-            </div>
-            <div class="toggle-row">
-                <span class="toggle-name">Salada Crua</span>
-                <label class="toggle-switch"><input type="checkbox" id="toggle-salada" checked onchange="toggleAcomp('salada-crua', this.checked)"><span class="toggle-slider"></span></label>
-            </div>
+            <div class="toggle-row"><span class="toggle-name">Arroz</span><label class="toggle-switch"><input type="checkbox" id="toggle-acomp-arroz" checked onchange="toggleAcomp('acomp-arroz', this.checked)"><span class="toggle-slider"></span></label></div>
+            <div class="toggle-row"><span class="toggle-name">Feijão</span><label class="toggle-switch"><input type="checkbox" id="toggle-acomp-feijao" checked onchange="toggleAcomp('acomp-feijao', this.checked)"><span class="toggle-slider"></span></label></div>
+            <div class="toggle-row"><span class="toggle-name">Farofa</span><label class="toggle-switch"><input type="checkbox" id="toggle-acomp-farofa" checked onchange="toggleAcomp('acomp-farofa', this.checked)"><span class="toggle-slider"></span></label></div>
+            <div class="toggle-row"><span class="toggle-name">Macarrão</span><label class="toggle-switch"><input type="checkbox" id="toggle-acomp-macarrao" checked onchange="toggleAcomp('acomp-macarrao', this.checked)"><span class="toggle-slider"></span></label></div>
+            <div class="toggle-row"><span class="toggle-name">Batata Frita</span><label class="toggle-switch"><input type="checkbox" id="toggle-acomp-batata" checked onchange="toggleAcomp('acomp-batata', this.checked)"><span class="toggle-slider"></span></label></div>
+            <div class="toggle-row"><span class="toggle-name">Salada Crua</span><label class="toggle-switch"><input type="checkbox" id="toggle-acomp-salada" checked onchange="toggleAcomp('acomp-salada', this.checked)"><span class="toggle-slider"></span></label></div>
         </div>
 
         <!-- PRATOS DO DIA -->
@@ -475,9 +463,12 @@ let pratoSelecionado = null;
 
 // Inicializar
 Object.values(GRUPOS).forEach(g => Object.keys(g.items).forEach(id => disp[id] = true));
-disp['farofa'] = true;
-disp['batata-frita'] = true;
-disp['salada-crua'] = true;
+disp['acomp-arroz']    = true;
+disp['acomp-feijao']   = true;
+disp['acomp-farofa']   = true;
+disp['acomp-macarrao'] = true;
+disp['acomp-batata']   = true;
+disp['acomp-salada']   = true;
 PRATOS.forEach(p => pratosAtivos[p.id] = false);
 
 // ── JSONBIN ─────────────────────────────────────
@@ -673,26 +664,21 @@ function qtyBev(id, delta) {
 function selecionarPrato(id, nome) {
     pratoSelecionado = { id, nome };
     document.getElementById('prato-titulo').textContent = nome;
-    document.querySelectorAll('input[name="acomp"], input[name="farofa"], input[name="talher"]').forEach(el => el.checked = false);
+    document.querySelectorAll('input[name="acomp"], input[name="talher"]').forEach(el => el.checked = false);
     irPara('prato');
     aplicarAcomp();
 }
 
 function addPrato(e) {
     e.preventDefault();
-    const acomp  = document.querySelector('input[name="acomp"]:checked')?.value;
-    const farofa = document.querySelector('input[name="farofa"]:checked')?.value;
+    const acomps = Array.from(document.querySelectorAll('input[name="acomp"]:checked')).map(x => x.value);
     const talher = document.querySelector('input[name="talher"]:checked')?.value;
-    if (!acomp)  { alert('Escolha um acompanhamento!'); return; }
-    if (!farofa) { alert('Escolha com ou sem farofa!'); return; }
     if (!talher) { alert('Informe se precisa de talher!'); return; }
     cart.push({
         tipo: pratoSelecionado.nome,
         preco: precos[pratoSelecionado.id],
-        acomp,
-        farofa,
-        talher,
-        acompFixo: 'Arroz e Feijão'
+        acomps: acomps.length > 0 ? acomps.join(', ') : 'Sem acompanhamento',
+        talher
     });
     voltarCardapio();
 }
@@ -734,9 +720,7 @@ function atualizarCarrinho() {
         if (item.ings)      detail += `<div class="cart-item-detail">Ing: ${item.ings}</div>`;
         if (item.temperos)  detail += `<div class="cart-item-detail">Tempero: ${item.temperos}</div>`;
         if (item.extras)    detail += `<div class="cart-item-detail">⭐ Extra: ${item.extras} (+R$ ${item.extrasPreco.toFixed(2)})</div>`;
-        if (item.acompFixo) detail += `<div class="cart-item-detail">Acomp: ${item.acompFixo}</div>`;
-        if (item.farofa)     detail += `<div class="cart-item-detail">${item.farofa}</div>`;
-        if (item.acomp)     detail += `<div class="cart-item-detail">Escolha: ${item.acomp}</div>`;
+        if (item.acomps)    detail += `<div class="cart-item-detail">Acomp: ${item.acomps}</div>`;
         if (item.talher)    detail += `<div class="cart-item-detail">Talher: ${item.talher}</div>`;
         return `<div class="cart-item"><div class="cart-item-title">${item.tipo}</div>${detail}<div class="cart-item-price">R$ ${item.preco.toFixed(2)}</div><button type="button" class="btn-remove" onclick="remover(${i})">Remover</button></div>`;
     }).join('');
@@ -800,9 +784,7 @@ function enviarWhatsApp(e) {
         if (item.ings)      msg += `Ingredientes: ${item.ings}\n`;
         if (item.temperos)  msg += `Tempero: ${item.temperos}\n`;
         if (item.extras)    msg += `⭐ Extras: ${item.extras} (+R$ ${item.extrasPreco.toFixed(2)})\n`;
-        if (item.acompFixo) msg += `Acompanhamentos: ${item.acompFixo}\n`;
-        if (item.farofa)    msg += `${item.farofa}\n`;
-        if (item.acomp)     msg += `Escolha: ${item.acomp}\n`;
+        if (item.acomps)    msg += `Acompanhamentos: ${item.acomps}\n`;
         if (item.talher)    msg += `🍴 Talher: ${item.talher}\n`;
     });
     msg += `━━━━━━━━━━━━━━━`;
@@ -925,52 +907,26 @@ function toggleAcomp(id, val) {
 }
 
 function aplicarAcomp() {
-    // Farofa
-    const wrapFarofaSim = document.getElementById('wrap-acomp-farofa-sim');
-    if (wrapFarofaSim) {
-        if (!disp['farofa']) {
-            wrapFarofaSim.classList.add('unavailable');
-            document.getElementById('acomp-farofa-sim').checked = false;
-            if (!wrapFarofaSim.querySelector('.unavailable-tag')) {
-                const t = document.createElement('span'); t.className='unavailable-tag'; t.textContent='Indisponível'; wrapFarofaSim.appendChild(t);
+    const acomps = ['arroz','feijao','farofa','macarrao','batata','salada'];
+    acomps.forEach(id => {
+        const key  = `acomp-${id}`;
+        const wrap = document.getElementById(`wrap-acomp-${id}`);
+        const inp  = document.getElementById(`acomp-${id}`);
+        if (wrap && inp) {
+            if (disp[key] === false) {
+                wrap.classList.add('unavailable');
+                inp.checked = false;
+                if (!wrap.querySelector('.unavailable-tag')) {
+                    const t = document.createElement('span'); t.className='unavailable-tag'; t.textContent='Indisponível'; wrap.appendChild(t);
+                }
+            } else {
+                wrap.classList.remove('unavailable');
+                const t = wrap.querySelector('.unavailable-tag'); if(t) t.remove();
             }
-        } else {
-            wrapFarofaSim.classList.remove('unavailable');
-            const t = wrapFarofaSim.querySelector('.unavailable-tag'); if(t) t.remove();
         }
-    }
-    // Batata Frita
-    const wrapBatata = document.getElementById('wrap-acomp-batata');
-    if (wrapBatata) {
-        if (!disp['batata-frita']) {
-            wrapBatata.classList.add('unavailable');
-            document.getElementById('acomp-batata').checked = false;
-            if (!wrapBatata.querySelector('.unavailable-tag')) {
-                const t = document.createElement('span'); t.className='unavailable-tag'; t.textContent='Indisponível'; wrapBatata.appendChild(t);
-            }
-        } else {
-            wrapBatata.classList.remove('unavailable');
-            const t = wrapBatata.querySelector('.unavailable-tag'); if(t) t.remove();
-        }
-    }
-    // Salada
-    const wrapSalada = document.getElementById('wrap-acomp-salada');
-    if (wrapSalada) {
-        if (!disp['salada-crua']) {
-            wrapSalada.classList.add('unavailable');
-            document.getElementById('acomp-salada').checked = false;
-            if (!wrapSalada.querySelector('.unavailable-tag')) {
-                const t = document.createElement('span'); t.className='unavailable-tag'; t.textContent='Indisponível'; wrapSalada.appendChild(t);
-            }
-        } else {
-            wrapSalada.classList.remove('unavailable');
-            const t = wrapSalada.querySelector('.unavailable-tag'); if(t) t.remove();
-        }
-    }
-    // Atualizar toggles no admin
-    const tf = document.getElementById('toggle-farofa'); if(tf) tf.checked = disp['farofa'] !== false;
-    const tb = document.getElementById('toggle-batata'); if(tb) tb.checked = disp['batata-frita'] !== false;
-    const ts = document.getElementById('toggle-salada'); if(ts) ts.checked = disp['salada-crua'] !== false;
+        const toggle = document.getElementById(`toggle-acomp-${id}`);
+        if (toggle) toggle.checked = disp[key] !== false;
+    });
 }
 
 // ── AUTO-REFRESH ────────────────────────────────
