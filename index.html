@@ -766,9 +766,14 @@ function calcTroco() {
 // ── WHATSAPP ────────────────────────────────────
 function enviarWhatsApp(e) {
     e.preventDefault();
-    const nome  = document.getElementById('nome').value;
-    const bloco = document.getElementById('bloco').value;
-    const apto  = document.getElementById('apto').value;
+    const nome  = document.getElementById('nome').value.trim();
+    const bloco = document.getElementById('bloco').value.trim();
+    const apto  = document.getElementById('apto').value.trim();
+
+    if (!nome)  { alert('Preencha o nome!'); return; }
+    if (!bloco) { alert('Preencha o bloco!'); return; }
+    if (!apto)  { alert('Preencha o apartamento!'); return; }
+    if (cart.length === 0) { alert('Seu carrinho está vazio!'); return; }
     const obs   = document.getElementById('obs').value;
     const pag   = document.querySelector('input[name="pag"]:checked').value;
     const total = cart.reduce((s, i) => s + i.preco, 0);
@@ -800,8 +805,8 @@ function enviarWhatsApp(e) {
     });
     msg += `━━━━━━━━━━━━━━━`;
 
-    tocarAlertaPedido();
     window.open(`https://wa.me/5521964983008?text=${encodeURIComponent(msg)}`, '_blank');
+    setTimeout(() => tocarAlertaPedido(), 300);
 
     setTimeout(() => {
         cart = [];
