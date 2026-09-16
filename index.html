@@ -899,10 +899,12 @@ function enviarWhatsApp(e) {
     msg += `\n━━━━━━━━━━━━━━━\n🛒 *ITENS DO PEDIDO:*\n`;
 
     cart.forEach(item => {
-        const isCombo = item.itensGourmet && item.itensDoce;
+        const isCombo    = item.itensGourmet && item.itensDoce;
+        const isGourmet  = item.itensGourmet && !item.itensDoce;
+        const isDoce     = item.itensDoce    && !item.itensGourmet;
+        const isBebida   = !item.itensGourmet && !item.itensDoce;
 
         if (isCombo) {
-            // Combo: mostrar gourmet e doce separados com valores individuais
             msg += `\n*${item.tipo}*\n`;
             item.itensGourmet.forEach((g, idx) => {
                 const label = item.itensGourmet.length > 1 ? `Gourmet ${idx+1}` : 'Pastel Gourmet';
@@ -911,29 +913,33 @@ function enviarWhatsApp(e) {
                 if (g.temperos) msg += `Tempero: ${g.temperos}\n`;
                 if (g.extras)   msg += `⭐ Extra: ${g.extras}\n`;
             });
-            if (item.extrasTotal > 0) msg += `⭐ Total extras: +R$ ${(item.extrasTotal * precos.extra).toFixed(2)}\n`;
+            if (item.extrasTotal > 0) msg += `\n⭐ Total extras: +R$ ${(item.extrasTotal * precos.extra).toFixed(2)}\n`;
             item.itensDoce.forEach((s, idx) => {
                 const label = item.itensDoce.length > 1 ? `Doce ${idx+1}` : 'Pastel Doce';
                 msg += `\n🍬 *${label}*\n${s}\n`;
             });
             msg += `💰 Total do combo: R$ ${item.preco.toFixed(2)}\n`;
-        } else {
+
+        } else if (isGourmet) {
             msg += `\n*${item.tipo}* — R$ ${item.preco.toFixed(2)}\n`;
-            if (item.itensGourmet) {
-                item.itensGourmet.forEach((g, idx) => {
-                    const label = item.itensGourmet.length > 1 ? `Gourmet ${idx+1}: ` : '';
-                    msg += `${label}Ingredientes: ${g.ings}\n`;
-                    if (g.temperos) msg += `${label}Tempero: ${g.temperos}\n`;
-                    if (g.extras)   msg += `${label}⭐ Extra: ${g.extras}\n`;
-                });
-                if (item.extrasTotal > 0) msg += `⭐ Extras: +R$ ${(item.extrasTotal * precos.extra).toFixed(2)}\n`;
-            }
-            if (item.itensDoce) {
-                item.itensDoce.forEach((s, idx) => {
-                    const label = item.itensDoce.length > 1 ? `Doce ${idx+1}: ` : '';
-                    msg += `${label}${s}\n`;
-                });
-            }
+            item.itensGourmet.forEach((g, idx) => {
+                const label = item.itensGourmet.length > 1 ? `Gourmet ${idx+1}` : 'Pastel Gourmet';
+                msg += `\n🥟 *${label}*\n`;
+                msg += `Ingredientes: ${g.ings}\n`;
+                if (g.temperos) msg += `Tempero: ${g.temperos}\n`;
+                if (g.extras)   msg += `⭐ Extra: ${g.extras}\n`;
+            });
+            if (item.extrasTotal > 0) msg += `\n⭐ Total extras: +R$ ${(item.extrasTotal * precos.extra).toFixed(2)}\n`;
+
+        } else if (isDoce) {
+            msg += `\n*${item.tipo}* — R$ ${item.preco.toFixed(2)}\n`;
+            item.itensDoce.forEach((s, idx) => {
+                const label = item.itensDoce.length > 1 ? `Doce ${idx+1}` : 'Pastel Doce';
+                msg += `\n🍬 *${label}*\n${s}\n`;
+            });
+
+        } else if (isBebida) {
+            msg += `\n🥤 *${item.tipo}* — R$ ${item.preco.toFixed(2)}\n`;
         }
     });
     msg += `━━━━━━━━━━━━━━━`;
