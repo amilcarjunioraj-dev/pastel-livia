@@ -435,7 +435,7 @@ const SABORES_DOCE = [
     { id: 'ouro-branco',  nome: 'Ouro Branco (Ninho + Bombom Ouro Branco)' },
     { id: 'doce-leite',   nome: 'Doce de Leite' },
     { id: 'pacoca',       nome: 'Paçoca (Doce de Leite + Paçoca)' },
-    { id: 'romeu-julieta',nome: 'Romeu e Julieta (Queijo + Goiabada)' },
+    { id: 'romeu',        nome: 'Romeu e Julieta (Queijo + Goiabada)' },
 ];
 
 const GRUPOS = {
@@ -461,6 +461,8 @@ let bevQty = { guaracamp: 1, coca: 1, 'coca-zero': 1 };
 let fluxo = { tipo: null, total: 0, atual: 0, itens: [], precoBase: 0, precoKey: '' };
 
 Object.values(GRUPOS).forEach(g => Object.keys(g.items).forEach(id => disp[id] = true));
+// Garantir que sabores doce também são inicializados
+SABORES_DOCE.forEach(s => { if (disp[`sabor-${s.id}`] === undefined) disp[`sabor-${s.id}`] = true; });
 
 // ── JSONBIN ──────────────────────────────────────
 async function carregarDados() {
